@@ -1,6 +1,4 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using TorgiGov.DataLayer.ApplicationContext;
 
-app.MapGet("/", () => "Hello World!");
 
-app.Run();
+ApplicationStartup.Go();
