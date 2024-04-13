@@ -13,6 +13,8 @@ public interface IRepository<T> where T : class, IIdentityField
     public void Delete(T entity);
 
     public void DeleteById(Guid id);
+
+    public void SaveChanges();
 }
 
 
@@ -47,6 +49,11 @@ public class Repository<T>(DbContext dbContext) : IRepository<T>
         {
             dbContext.Set<T>().Remove(entity);
         }
+    }
+
+    public void SaveChanges()
+    {
+        dbContext.SaveChanges();
     }
 }
 

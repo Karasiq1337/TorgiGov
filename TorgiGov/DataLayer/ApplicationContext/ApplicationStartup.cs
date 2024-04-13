@@ -16,18 +16,19 @@ public static class ApplicationStartup
 
     private static WebApplicationBuilder _builder;
     
-    public static void Go()
+    public static WebApplication Go()
     {
         _builder = WebApplication.CreateBuilder();
         BuildConfig();
         BuildDataContext();
         CreateWebApplication();
         
-        _application.Start();
+        return _application;
     }
     
     private static void CreateWebApplication()
     {
+        _builder.Services.AddControllersWithViews();
         _application =  _builder.Build();
     }
 
