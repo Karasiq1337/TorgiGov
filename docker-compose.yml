@@ -1,0 +1,6 @@
+﻿services:
+  torgigov:
+    image: torgigov
+    build:
+      context: .
+      dockerfile: TorgiGov/Dockerfile
