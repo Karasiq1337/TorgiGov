@@ -6,16 +6,27 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>7da5eb97-4f5f-49fd-bf2e-0078a6e95a92</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>TorgiGov</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="React\torgi-gov\package-lock.json" />
+      <_ContentIncludedByDefault Remove="React\torgi-gov\package.json" />
+      <_ContentIncludedByDefault Remove="frontend\package.json" />
+      <_ContentIncludedByDefault Remove="frontend\public\manifest.json" />
+      <_ContentIncludedByDefault Remove="frontend\tsconfig.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\public\manifest.json" />
     </ItemGroup>
 
 </Project>

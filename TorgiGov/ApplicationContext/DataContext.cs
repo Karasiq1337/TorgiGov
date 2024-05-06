@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TorgiGov.DataLayer;
 using TorgiGov.DataLayer.Entities;
+using TorgiGov.DataLayer.Repositories;
 
-namespace TorgiGov.DataLayer.ApplicationContext;
+namespace TorgiGov.ApplicationContext;
 
-public class DataContext : DbContext
+public sealed class DataContext : DbContext
 {
-    public IRepository<User> UsersRepository;
+    public UsersRepository UsersRepository;
     
     public DataContext(DbContextOptions<DataContext> options)
         :base(options)
     {
         Database.EnsureCreated();
-        
-        var cock = Database.GenerateCreateScript();
 
-        UsersRepository = new Repository<User>(this);
+        UsersRepository = new UsersRepository(this);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

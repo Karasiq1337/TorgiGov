@@ -1,11 +1,12 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Npgsql;
+using TorgiGov.ApplicationContext;
 using TorgiGov.Configs;
-using TorgiGov.DataLayer.Entities;
+using TorgiGov.DataLayer;
+using TorgiGov.DataLayer.CommandHandlers;
 
-namespace TorgiGov.DataLayer.ApplicationContext;
+namespace TorgiGov.ApplicationLayer;
 
 public static class ApplicationStartup
 {
@@ -16,19 +17,31 @@ public static class ApplicationStartup
 
     private static WebApplicationBuilder _builder;
     
-    public static WebApplication Go()
+    public static WebApplication ConfigureApplication()
     {
         _builder = WebApplication.CreateBuilder();
         BuildConfig();
         BuildDataContext();
+        AddDI();
         CreateWebApplication();
+
         
         return _application;
     }
-    
+
+    private static void AddDI()
+    {
+        _builder.Services.AddSingleton<IUserCommandHandler, UserCommandHandler>();
+    }
+
     private static void CreateWebApplication()
     {
         _builder.Services.AddControllersWithViews();
+        _builder.Services.AddControllers();
+        _builder.Services.AddEndpointsApiExplorer();
+        _builder.Services.AddSwaggerGen();
+        _builder.Services.AddMemoryCache();
+        
         _application =  _builder.Build();
     }
 

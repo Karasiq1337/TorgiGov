@@ -3,7 +3,7 @@ using TorgiGov.Configs;
 
 namespace TorgiGov;
 
-public static class ExtensionMethods
+public static class NpgsqlConnectionStringBuilderExtensions
 {
     public static void UseDatabaseConfig(this NpgsqlConnectionStringBuilder builder, DatabaseConfig configObj)
     {

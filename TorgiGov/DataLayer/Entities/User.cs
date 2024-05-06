@@ -1,17 +1,14 @@
 ﻿namespace TorgiGov.DataLayer.Entities;
 
-public class User : IIdentityField
+public class User(Guid id, string login, string password) : IEntity
 {
-    public User(string login, string password)
+    public User(string login, string password) : this(new Guid(), login, password)
     {
-        Id = new Guid();
-        Login = login;
-        Password = password;
     }
-    
-    public Guid Id { get; set; }
 
-    public string Login { get; set; }
-    
-    public string Password { get; set; }
+    public Guid Id { get; set; } = id;
+
+    public string Login { get; set; } = login;
+
+    public string Password { get; set; } = password;
 }
