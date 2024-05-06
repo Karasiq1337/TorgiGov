@@ -27,6 +27,7 @@
       <_ContentIncludedByDefault Remove="frontend\public\manifest.json" />
       <_ContentIncludedByDefault Remove="frontend\tsconfig.json" />
       <_ContentIncludedByDefault Remove="ClientApp\public\manifest.json" />
+      <_ContentIncludedByDefault Remove="frontend\package-lock.json" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using TorgiGov.ApplicationContext;
 using TorgiGov.DataLayer.ApiLayer;
 
-namespace TorgiGov.DataLayer.CommandHandlers;
+namespace TorgiGov.CommandHandlers;
 
 public interface IUserCommandHandler
 {
