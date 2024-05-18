@@ -1,6 +1,6 @@
-﻿namespace TorgiGov.DataLayer;
+﻿namespace TorgiGov;
 
 public static class GlobalConstants
 {
-    public static string PostgresDatabaseConfig = "PostgresDatabase";
+    public static readonly string PostgresDatabaseConfig = "PostgresDatabase";
 }

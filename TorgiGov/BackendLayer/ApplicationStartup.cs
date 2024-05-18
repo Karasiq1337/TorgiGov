@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Npgsql;
 using TorgiGov.ApplicationContext;
+using TorgiGov.CommandHandlers;
 using TorgiGov.Configs;
 using TorgiGov.DataLayer;
-using TorgiGov.DataLayer.CommandHandlers;
 
 namespace TorgiGov.ApplicationLayer;
 
