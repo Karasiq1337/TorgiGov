@@ -20,11 +20,11 @@ public static class UserExtension
     {
         var mySHA256 = SHA256.Create();
         var passwordHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password)).ToString();
-        return new User (userDto.Login, passwordHash)
+        return new User (userDto.Login, passwordHash!)
         {
             Id = Guid.NewGuid(),
             Login = userDto.Login.ToLower(),
-            Password = passwordHash,
+            Password = passwordHash!,
         };
     }
 }

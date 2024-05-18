@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TorgiGov.CommandHandlers;
 using TorgiGov.DataLayer.ApiLayer;
-using TorgiGov.DataLayer.CommandHandlers;
 
 namespace TorgiGov.Controllers;
 
@@ -15,7 +15,7 @@ public class UsersController(IUserCommandHandler userCommandHandler) : Controlle
     public async Task<IActionResult> CreateUser(UserDto userDto)
     {
        if (_userCommandHandler.TryFindByLogin(userDto.Login))
-            return BadRequest("User with this login already exsists");
+            return BadRequest("User with this login already exists");
        
        await _userCommandHandler.CreateUserAsync(userDto);
        return Ok();
