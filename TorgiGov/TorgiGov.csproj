@@ -18,6 +18,7 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Include="AuctionAssistantWPF\.vs\AuctionAssistantWPF\v17\DocumentLayout.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +28,27 @@
       <_ContentIncludedByDefault Remove="frontend\public\manifest.json" />
       <_ContentIncludedByDefault Remove="frontend\tsconfig.json" />
       <_ContentIncludedByDefault Remove="ClientApp\public\manifest.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="AuctionAssistantWPF\.vs\AuctionAssistantWPF\DesignTimeBuild\.dtbcache.v2" />
+      <None Include="AuctionAssistantWPF\.vs\AuctionAssistantWPF\FileContentIndex\0c4186ea-ca68-482e-9ed4-d6e7b877eb9a.vsidx" />
+      <None Include="AuctionAssistantWPF\.vs\AuctionAssistantWPF\v17\.futdcache.v2" />
+      <None Include="AuctionAssistantWPF\.vs\ProjectEvaluation\auctionassistantwpf.metadata.v8.bin" />
+      <None Include="AuctionAssistantWPF\.vs\ProjectEvaluation\auctionassistantwpf.projects.v8.bin" />
+      <None Include="AuctionAssistantWPF\.vs\ProjectEvaluation\auctionassistantwpf.strings.v8.bin" />
+      <None Include="AuctionAssistantWPF\AuctionAssistantWPF.sln" />
+      <None Include="AuctionAssistantWPF\AuctionAssistantWPF\AuctionAssistantWPF.csproj" />
+      <None Include="AuctionAssistantWPF\AuctionAssistantWPF\AuctionAssistantWPF.csproj.user" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="AuctionAssistantWPF\AuctionAssistantWPF\App.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="AuctionAssistantWPF\AuctionAssistantWPF\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
     </ItemGroup>
 
 </Project>
