@@ -1,0 +1,325 @@
+﻿<Window x:Class="AuctionAssistantWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AuctionAssistantWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="515" Width="365" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF232D3E" Offset="0.021"/>
+            <GradientStop Color="#FF1D222C" Offset="0.975"/>
+            <GradientStop Color="#FF1D222C" Offset="0.51"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="TextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#FF11141A"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#FF2D333D"/>
+            <Setter Property="Padding" Value="10 0 0 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid x:Name="root" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" SnapsToDevicePixels="True">
+                            <Border x:Name="BackGround" BorderThickness="1" CornerRadius="2" Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          BorderThickness="0" 
+                                          Padding="{TemplateBinding Padding}" 
+                                          IsTabStop="False" 
+                                          Background="{x:Null}" 
+                                          TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF383C44"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF1D578C"/>
+                                <Setter Property="Background" Value="#FF0E1116"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+        </Style>
+
+        <Style x:Key="PasswordBox" TargetType="PasswordBox">
+            <Setter Property="Background" Value="#FF11141A"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#FF2D333D"/>
+            <Setter Property="Padding" Value="10 0 0 0"/>
+            <EventSetter Event="PasswordChanged" Handler="PasswordBox_PasswordChanged"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Grid x:Name="root" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" SnapsToDevicePixels="True">
+                            <Border x:Name="BackGround" BorderThickness="1" CornerRadius="2" Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          BorderThickness="0" 
+                                          Padding="{TemplateBinding Padding}" 
+                                          IsTabStop="False" 
+                                          Background="{x:Null}" 
+                                          TextElement.Foreground="{TemplateBinding Foreground}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF383C44"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF1D578C"/>
+                                <Setter Property="Background" Value="#FF0E1116"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="90"/>
+        </Grid.RowDefinitions>
+        <Label Content="Auction Assistant" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Height="35" Width="240" FontSize="20" FontFamily="Castellar" Grid.Row="1" Foreground="#FFEDEDED"/>
+        <Grid Name="ToolBar" Background="Transparent" Grid.Row="0" MouseDown="ToolBar_MouseDown">
+            <Polygon Fill="White" Opacity="0.2" Points="107,0 115,7 249,7 257,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Image Name="MinCollapse" Height="22" Width="22" Margin="1 9 1 1" MouseDown="MinCollapse_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Source/CollapsePassive.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="/Source/CollapseActive.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.Effect>
+                        <BlurEffect Radius="1"/>
+                    </Image.Effect>
+                </Image>
+                <Image Name="MinCross" Height="20" Width="20" Margin="4 4 4 0" MouseDown="MinCross_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Image.Source" Value="/Source/CrossPassive.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Image.Source" Value="/Source/CrossActive.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.Effect>
+                        <BlurEffect Radius="1"/>
+                    </Image.Effect>
+                </Image>
+            </StackPanel>
+        </Grid>
+        <TextBox x:Name="LogTextBox" Grid.Row = "2" Style="{StaticResource TextBox}" Margin="25 55 25 0" VerticalAlignment="Top"/>
+        <TextBlock IsHitTestVisible="False" FontSize="14" Text="Логин" Grid.Row="2" Margin="35 58 0 0" VerticalAlignment="Top" Foreground="Gray">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=LogTextBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        
+        <PasswordBox x:Name="PassTextBox" Grid.Row = "2" Style="{StaticResource PasswordBox}" Margin="25 100 25 0" VerticalAlignment="Top"/>
+        <TextBlock Name="Watermark" IsHit TestVisible="False" FontSize="14" Text="Пароль" Grid.Row="2" Margin="35 103 0 0" VerticalAlignment="Top" Foreground="Gray"/>
+        <PasswordBox x:Name="PassAproveTextBox" Grid.Row = "2" Style="{StaticResource PasswordBox}" Margin="25 140 25 0" VerticalAlignment="Top"/>
+        <TextBlock Name="Watermark2" IsHitTestVisible="False" FontSize="14" Text="Подтвердите пароль" Grid.Row="2" Margin="35 142 0 0" VerticalAlignment="Top" Foreground="Gray">
+        </TextBlock>
+
+        <ToggleButton Name= "TGB" Grid.Row="2" Height="30" Width="220" HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Margin="25 210 0 0" Content="Уже зарегисрированы?" Foreground="#FFACB3BF" Checked="TGB_Checked" Unchecked="TGB_UnChecked">
+            <ToggleButton.Template>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <StackPanel>
+                        <Border Height="20" Width="20" CornerRadius="2" HorizontalAlignment="Left"
+                            BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF333842"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" Duration="0:0:0.100" To="#FF333842"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" Duration="0:0:0.100" To="#FF51555C"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Image Margin="4">
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" 
+                                                         Value="true">
+                                                <Setter Property="Image.Source" Value="\Source\Галочка.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Border>
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="30 -16 0 0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </ToggleButton.Template>
+        </ToggleButton>
+        <ToggleButton Name= "BtnShowPassword" Grid.Row="2" Height="30" Width="220" HorizontalAlignment="Left"
+                      VerticalAlignment="Top" Margin="25 175 0 0" Content="Показать пароль" Foreground="#FFACB3BF"  Checked="BtnShowPassword_Checked" Unchecked="BtnShowPassword_Unchecked">
+            <ToggleButton.Template>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <StackPanel>
+                        <Border Height="20" Width="20" CornerRadius="2" HorizontalAlignment="Left"
+                            BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF333842"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" Duration="0:0:0.100" To="#FF333842"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" Duration="0:0:0.100" To="#FF51555C"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Image Margin="4">
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" 
+                                                         Value="true">
+                                                <Setter Property="Image.Source" Value="\Source\Галочка.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Border>
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="30 -16 0 0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </ToggleButton.Template>
+        </ToggleButton>
+
+        <Border Name="ButtonBorder" Grid.Row="2"  Height="30"  Margin="25 230 25 0"
+                            BorderThickness="1" Background="#FF0E3A59">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="BorderBrush" Value="#FF00AEFF"/>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                    Duration="0:0:0.1" To="#FF095386"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                    Duration="0:0:0.1" To="#FF00AEFF"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Button Name ="Autorisation" Content="Регистрация" FontSize="16" Foreground="White" Click="Button_Click_1" FontFamily="Century Schoolbook">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="#FF0E86CA"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" BorderThickness="0" BorderBrush="Black" 
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FF00AEFF"/>
+                                        </Trigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                        Duration="0:0:0.100" To="2 2 0 0"/>
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF095386"
+                                                                    Duration="0:0:0.0002"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                        Duration="0:0:0.100" To="0"/>
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF0E86CA"
+                                                                    Duration="0:0:0.0002"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Border>
+       
+ 
+    </Grid>
+</Window>
