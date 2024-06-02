@@ -7,8 +7,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import {Authorization} from "./Menu/Authorization/Authorization";
-
-
+import "bootstrap/dist/css/bootstrap-grid.min.css"
 
 
 const router = createBrowserRouter([
@@ -28,6 +27,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>
+    <App/>
   </React.StrictMode>
 );
 
