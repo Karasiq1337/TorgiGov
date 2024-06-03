@@ -1,12 +1,19 @@
 import React from 'react';
 import './App.css';
+import {NavBar} from "./Menu/NavBar";
 
 function App() {
   return (
-    <div >
-      <header>
-      </header>
-    </div>
+      <>
+          <header>
+              <NavBar></NavBar>
+          </header>
+          <body>
+          </body>
+          <footer>
+          </footer>
+      </>
+
   );
 }
 
