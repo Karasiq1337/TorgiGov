@@ -31,7 +31,7 @@ function AuthorizationElement(){
     return(
         <Form >
             <Form.Group>
-                <Form.Label>Авторизоваться</Form.Label>  
+                <Form.Label>Зарегистрируйтесь для продолжения</Form.Label>  
             </Form.Group>
             <Form.Group className='mb-3'>
                 <Form.Control
@@ -40,17 +40,20 @@ function AuthorizationElement(){
                     aria-describedby="basic-addon1"
                 />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className='mb-3'>
                 <Form.Control
                     placeholder="Пароль"
                     aria-label="Пароль"
                 />
             </Form.Group>
-            <Form.Group>
-                <Form.Label>Уже зарегестрированны?</Form.Label>
+            <Form.Group className='mb-3'>
+                <Form.Control
+                    placeholder="Повторите Пароль"
+                    aria-label=" Повторите Пароль"
+                />
             </Form.Group>
             <FormGroup>
-                <Button variant="primary">Войти</Button>{' '}
+                <Button variant="primary">Регистрация</Button>{' '}
             </FormGroup>
         </Form>
     )

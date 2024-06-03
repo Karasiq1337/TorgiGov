@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import {Authorization} from "./Menu/Authorization/Authorization";
 import "bootstrap/dist/css/bootstrap-grid.min.css"
+import {NavBar} from "./Menu/NavBar";
 
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: "login",
         element: <Authorization/>
+    },
+    {
+        path: "HomePage",
+        element: <NavBar/>
     }
 ]);
 
