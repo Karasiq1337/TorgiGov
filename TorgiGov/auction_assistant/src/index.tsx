@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Authorization/>
     },
     {
-        path: "HomePage",
+        path: "Home",
         element: <NavBar/>
     }
 ]);
