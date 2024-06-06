@@ -3,18 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {
+    BrowserRouter,
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
 import {Authorization} from "./Menu/Authorization/Authorization";
 import "bootstrap/dist/css/bootstrap-grid.min.css"
 import {NavBar} from "./Menu/NavBar";
-
+import {Home} from "./Menu/HomePage/Home";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <div>Hello world!</div>,
+        element: <div></div>,
     },
     {
         path: "login",
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     },
     {
         path: "Home",
-        element: <a/>
+        element: <Home/>
     }
 ]);
 
@@ -32,7 +33,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>
-    <App/>
+    <BrowserRouter>
+        <App/>  
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {NavBar} from "./Menu/NavBar";
-import {Route, Routes} from "react-router-dom";
+import {Route, Router, Routes} from "react-router-dom";
+import {Home} from "./Menu/HomePage/Home";
 
 function App() {
   return (
