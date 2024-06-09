@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useReducer} from 'react';
 import './App.css';
 import {NavBar} from "./Menu/NavBar";
 import {Route, Routes} from "react-router-dom";
@@ -6,7 +6,9 @@ import {Home} from "./Menu/HomePage/Home";
 import {Authorization} from "./Menu/Authorization/Authorization";
 
 
-function App() {
+function App(){
+    
+    
   return (
       <>
           <header>

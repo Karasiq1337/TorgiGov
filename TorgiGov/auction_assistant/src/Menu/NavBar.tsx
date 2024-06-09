@@ -1,12 +1,9 @@
 ﻿import React, {useState} from "react";
 import Form from 'react-bootstrap/Form';
-import {Dropdown, FormText, Image, Modal, Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
+import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
 import {Container} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
-import InputGroupText from "react-bootstrap/InputGroupText";
-import FormCheckInput from "react-bootstrap/FormCheckInput";
-import {Link} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGem } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,9 +12,7 @@ import { faGem } from '@fortawesome/free-solid-svg-icons';
         const [login, setLogin] = useState<string>('');
         const [password, setPassword] = useState<string>('');
         const [showForm, setShowForm] = useState<boolean>(true);
-        const handleLogin = () => {
-            setShowForm(false);
-        };
+
         return (
             <>
                 <Navbar expand="lg" className="bg-body-tertiary">
@@ -35,7 +30,6 @@ import { faGem } from '@fortawesome/free-solid-svg-icons';
                                 <NavLink className={"text-center border border-primary"}>Статистика</NavLink>
                             </Nav>
                             <Nav>
-                                <div>
                                 {showForm ? (
                                     <InputGroup className="">
                                         <Form.Control type={"text"} placeholder={"Логин"}
@@ -49,11 +43,10 @@ import { faGem } from '@fortawesome/free-solid-svg-icons';
                                     </InputGroup>
                                 ) : (
                                     <>
-                                        <FontAwesomeIcon icon={faGem}/>
-                                        <span>{login}</span>
+                                        <FontAwesomeIcon icon={faGem} className={'me-3 mt-1'}/>
+                                        <span>{`Привет, ${ login }!`} </span>
                                     </>
                                 )}
-                                </div>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
