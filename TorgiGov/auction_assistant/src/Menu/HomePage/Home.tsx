@@ -5,14 +5,11 @@ import {Col, Container, FormText, Row, Tab} from "react-bootstrap";
 export function Home() {
     return(
         <Form>
-            
                 <Row>
                     <Col>
-                        11
+                        ПРОСТО "ХЛОП"
                     </Col>
-                    
                 </Row>
-            
         </Form>
     )
 }
