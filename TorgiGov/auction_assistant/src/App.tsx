@@ -6,6 +6,7 @@ import {Home} from "./Menu/HomePage/Home";
 import {Provider} from "react-redux";
 import {persistor, store} from "./AppStore"
 import {PersistGate} from "redux-persist/integration/react";
+import {Torgi} from "./Menu/Torgi/Torgi";
 
 function App(){
   return (  
@@ -16,6 +17,7 @@ function App(){
               </header>
               <Routes>
                   <Route path={"/home"} element={<Home/>}/>
+                  <Route path={"/search"} element={<Torgi/>}/>
               </Routes>
               <footer>
               </footer>
