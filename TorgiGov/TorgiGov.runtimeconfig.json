@@ -1,0 +1,20 @@
+﻿{
+  "runtimeOptions": {
+    "tfm": "net8.0",
+    "framework": [
+      {
+      "name": "Microsoft.NETCore.App",
+      "version": "8.0.0"
+    },
+    {
+      "name": "Microsoft.AspNetCore.App",
+      "version": "8.0.0"
+    }],
+    "configProperties": {
+      "System.GC.Server": true,
+      "System.GC.HeapCount": 12,
+      "System.Threading.ThreadPool.MinThreads": 4,
+      "System.Threading.ThreadPool.MaxThreads": 25
+    }
+  }
+}
