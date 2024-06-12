@@ -3,7 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React, {useState} from "react";
-import {logIn} from "./AuthReducer";
+import {logIn, logOut} from "./AuthReducer";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
 
 const Authorization = () =>{
@@ -25,11 +25,11 @@ const Authorization = () =>{
             </InputGroup>  
         )
     }
-    
     return(
-        <>
-            <span>{`Привет, ${ login }!`} </span>
-        </>
+        <Form>
+            <Form.Label className={'me-3'}>{`Привет, ${ login }!`} </Form.Label>
+            <Button onClick={() => dispatch(logOut())}>Выйти</Button>
+        </Form>
     )
 }
 
