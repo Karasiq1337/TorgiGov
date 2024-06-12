@@ -1,8 +1,8 @@
 ﻿namespace TorgiGov.DataLayer.Entities;
 
-public class User(Guid id, string login, string password) : IEntity
+public class User(Guid id, string login, byte[] password) : IEntity
 {
-    public User(string login, string password) : this(new Guid(), login, password)
+    public User(string login, byte[] password) : this(new Guid(), login, password)
     {
     }
 
@@ -10,5 +10,5 @@ public class User(Guid id, string login, string password) : IEntity
 
     public string Login { get; set; } = login;
 
-    public string Password { get; set; } = password;
+    public byte[] Password { get; set; } = password;
 }

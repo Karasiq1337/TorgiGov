@@ -7,6 +7,6 @@ public class UsersRepository(DbContext dbContext) : Repository<User>(dbContext)
 {
     public User? GetByLogin(string login)
     {
-        return Entities.FirstOrDefault(u => u.Login.Equals(login, StringComparison.CurrentCultureIgnoreCase));
+        return Entities.FirstOrDefault(u => u.Login.Equals(login));
     }
 }

@@ -12,19 +12,19 @@ public static class UserExtension
         return new UserDto
         {
             Login = user.Login,
-            Password = user.Password,
+            Password = user.Password.ToString()!,
         };
     }
 
     public static User MapToEntity(this UserDto userDto)
     {
-        var mySHA256 = SHA256.Create();
-        var passwordHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password)).ToString();
-        return new User (userDto.Login, passwordHash!)
+        var mySha256 = SHA256.Create();
+        var passwordHash = mySha256.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password));
+        return new User (userDto.Login, passwordHash)
         {
             Id = Guid.NewGuid(),
             Login = userDto.Login.ToLower(),
-            Password = passwordHash!,
+            Password = passwordHash,
         };
     }
 }

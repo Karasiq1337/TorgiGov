@@ -31,6 +31,7 @@ public static class ApplicationStartup
     private static void AddDI()
     {
         _builder.Services.AddSingleton<IUserCommandHandler, UserCommandHandler>();
+        _builder.Services.AddSingleton<ITorgiCommandHandler, TorgiCommandHandler>();
     }
 
     private static void CreateWebApplication()
