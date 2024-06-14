@@ -3,11 +3,13 @@
 export interface AuthInitialState {
     login: string,
     isLogged: boolean,
+    regClicked: boolean,
 }
 
 const initialState : AuthInitialState = {
     login: '',
     isLogged: false,
+    regClicked: false,
 }
 
 export const authSlice = createSlice({
@@ -21,9 +23,15 @@ export const authSlice = createSlice({
             logOut : (state) => {
                 state.login = '';
                 state.isLogged = false;
+            },
+            showReg : (state) => {
+                state.regClicked = true;
+            },
+            hideReg : (state) => {
+                state.regClicked = false;
             }
         }
 })
 
-export const { logIn, logOut } = authSlice.actions
+export const { logIn, logOut, showReg, hideReg } = authSlice.actions
 export default authSlice.reducer

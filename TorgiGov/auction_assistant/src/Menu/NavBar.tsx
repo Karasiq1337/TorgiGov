@@ -28,9 +28,6 @@ export const NavBar = () => {
                         <Nav>
                             <Authorization></Authorization>
                         </Nav>
-                        <Nav>
-                            <RegModal></RegModal>
-                        </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

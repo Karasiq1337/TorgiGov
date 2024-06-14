@@ -5,6 +5,9 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap-grid.min.css"
+import {persistor, store} from "./AppStore";
+import {PersistGate} from "redux-persist/integration/react";
+import {Provider} from "react-redux";
 
 
 const root = ReactDOM.createRoot(
@@ -13,7 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-        <App/>  
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <App/>
+            </PersistGate>
+        </Provider>     
     </BrowserRouter>
   </React.StrictMode>
 );

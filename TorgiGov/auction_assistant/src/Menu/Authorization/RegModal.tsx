@@ -2,15 +2,18 @@ import React, {useEffect, useState} from "react";
 import {FormCheck, FormControl, FormGroup, FormLabel, FormText, Modal, ModalBody, ModalTitle} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {useAppDispatch} from "../../AppHooks";
+import {hideReg} from "./AuthReducer";
 
 
 const  RegModal = () => {
+    const dispatch = useAppDispatch();
     const [show, setShow] = useState(false);
     
     useEffect(() => {
         setShow(true);
     }, []);
-    const handleclose = () => setShow(false);
+    const handleclose = () => dispatch(hideReg());
     
     
     return (

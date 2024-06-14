@@ -3,7 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React, {useState} from "react";
-import {logIn, logOut} from "./AuthReducer";
+import {logIn, logOut, showReg} from "./AuthReducer";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
 
 const Authorization = () =>{
@@ -20,8 +20,10 @@ const Authorization = () =>{
                               onChange={(e) => setTextInput(e.target.value)}/>
                 <Form.Control type={"password"} placeholder={"Пароль"}
                               className={"form-control me-3"} />
-                <Button type={"submit"} className={"btn btn-primary me-5"}
+                <Button type={"submit"} className={"btn btn-primary me-3"}
                         onClick={() => dispatch(logIn(textInput))}>Вход</Button>
+                <Button type={"submit"} 
+                        onClick={() => dispatch(showReg())}>Регистрация</Button>
             </InputGroup>  
         )
     }

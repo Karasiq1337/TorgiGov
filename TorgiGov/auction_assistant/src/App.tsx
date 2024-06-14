@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {NavBar} from "./Menu/NavBar";
 import {Route, Routes} from "react-router-dom";
@@ -7,22 +7,27 @@ import {Provider} from "react-redux";
 import {persistor, store} from "./AppStore"
 import {PersistGate} from "redux-persist/integration/react";
 import {Torgi} from "./Menu/Torgi/Torgi";
+import {useAppSelector} from "./AppHooks";
+import RegModal from "./Menu/Authorization/RegModal";
 
 function App(){
+    const regClicked = useAppSelector((state) => state.authReducer.regClicked); 
+    
   return (  
-      <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-              <header>
-                  <NavBar></NavBar>
-              </header>
-              <Routes>
-                  <Route path={"/home"} element={<Home/>}/>
-                  <Route path={"/search"} element={<Torgi/>}/>
-              </Routes>
-              <footer>
-              </footer>
-          </PersistGate>
-      </Provider>
+      <>
+          <header>
+              <NavBar></NavBar>
+          </header>
+          <body>
+          {regClicked && <RegModal/>}
+            <Routes>
+                <Route path={"/home"} element={<Home/>}/>
+                <Route path={"/search"} element={<Torgi/>}/>
+            </Routes>
+          </body>
+          <footer>
+          </footer>
+      </>
   );
 }
 
