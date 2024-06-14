@@ -1,7 +1,13 @@
 ﻿import React from "react";
-import {Nav, Navbar, NavDropdown, NavLink} from "react-bootstrap";
+import {
+    Nav,
+    Navbar,
+    NavDropdown,
+    NavLink
+} from "react-bootstrap";
 import {Container} from "react-bootstrap";
 import Authorization from "./Authorization/Authorization";
+import RegModal from "./Authorization/RegModal";
 export const NavBar = () => {
     return (
         <>
@@ -21,6 +27,9 @@ export const NavBar = () => {
                         </Nav>
                         <Nav>
                             <Authorization></Authorization>
+                        </Nav>
+                        <Nav>
+                            <RegModal></RegModal>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
