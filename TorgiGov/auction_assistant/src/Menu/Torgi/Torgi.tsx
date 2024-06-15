@@ -1,6 +1,13 @@
 ﻿import React from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, Dropdown, DropdownMenu, FormGroup, Row,} from "react-bootstrap";
+import {
+    Col,
+    Container,
+    Dropdown,
+    DropdownMenu,
+    FormGroup, FormLabel,
+    Row,
+} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {LotProps, PropertyType, TorgiState, TorgiType} from "./Torgi.types";
 
@@ -77,8 +84,44 @@ function CreateTitle(props : LotProps) : string{
     return `${type} земель ${propertyType} ${address}` 
         
 }
+
+
 const Lot = ( props : LotProps) =>{
     return(
-        <h4>{CreateTitle(props)}</h4>
+        <Form className={"text-center border border-primary bg-body-tertiary "}>
+                <Row>
+                    <Col>
+                        <FormGroup className={'text-start ms-5 mt-3'}>
+                           <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
+                               <h4>{CreateTitle(props)}</h4>
+                           </Form.Label>
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup className={'text-start mt-4'}>
+                            <Form.Label expand={"lg"} className={"bg-body-tertiary"}>
+                                {CreateTitle(props)}
+                            </Form.Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+            <Row>
+                <Col>
+                    <FormGroup className={'text-start ms-5 mt-3 mb-3'}>
+                        <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
+                            Площадь: {props.Area}  M <sup>2</sup>
+                        </Form.Label>
+                    </FormGroup>
+                </Col>
+                <Col>
+                    <FormGroup className={'text-start  mb-3'}>
+                        <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
+                            {CreateTitle(props)}
+                        </Form.Label>
+                    </FormGroup>
+                </Col>
+            </Row>
+        </Form>
+        
     )
 }
