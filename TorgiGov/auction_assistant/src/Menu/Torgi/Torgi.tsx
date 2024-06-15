@@ -1,14 +1,8 @@
 ﻿import React from "react";
 import Form from "react-bootstrap/Form";
-import {
-    Col,
-    Container,
-    Dropdown,
-    DropdownMenu,
-    FormGroup,
-    Row,
-} from "react-bootstrap";
+import {Col, Container, Dropdown, DropdownMenu, FormGroup, Row,} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {LotProps, PropertyType, TorgiState, TorgiType} from "./Torgi.types";
 
 export function Torgi() {
     const forms = ['Государственная (неразграниченная) собственность', 'Иная собственность', 'Собственность субъектов РФ']
@@ -74,43 +68,17 @@ function DropDownButton(labels : string[], initialLabel : string){
         </Dropdown>
     )
 }
-
-
-export enum TorgiType{
-    Rent = 0,
-    Sale = 1,
+function CreateTitle(props : LotProps) : string{
+    const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
+    const propertyType = props.PropertyType == PropertyType.AgriculturalLand ? "сельскохозяйственного назначения" 
+        : "начелённых пунктов";
+    const address = props.Address != null ? `по адресу ${props.Address}` : '';
+    
+    return `${type} земель ${propertyType} ${address}` 
+        
 }
-
-export enum TorgiState{
-    Published,
-    ApplicationAcceptance,
-}
-
-export enum PropertyType{
-    AgriculturalLand,
-    SettlementsLands,
-}
-
-export interface LotProps{
- Id : string | null,
- Type : TorgiType | null,
- Platform : string | null,
- Izveshenie : string | null,
- State : TorgiState | null,
- Link : string | null,
- StartDate : Date | null,
- EndDate : Date | null, 
- RFSubject : string | null,
- Address : string | null,
- Deposit : number | null,
- AuctionStep : number | null,
- StartCost : number | null,
- PropertyType : PropertyType | null,
- Area : number | null, 
-}
-
 const Lot = ( props : LotProps) =>{
     return(
-        <div>{props.Area}</div>
+        <h4>{CreateTitle(props)}</h4>
     )
 }
