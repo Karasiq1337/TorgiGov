@@ -7,7 +7,7 @@ import {
 } from "react-bootstrap";
 import {Container} from "react-bootstrap";
 import Authorization from "./Authorization/Authorization";
-import RegModal from "./Authorization/RegModal";
+
 export const NavBar = () => {
     return (
         <>

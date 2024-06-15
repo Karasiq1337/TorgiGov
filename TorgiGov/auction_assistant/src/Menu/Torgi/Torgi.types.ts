@@ -1,18 +1,37 @@
-﻿
+﻿import React from "react";
+
 
 export enum TorgiType{
-    Rent = 0,
-    Sale = 1,
+    Rent = "Rent",
+    Sale = "Sale",
 }
 
 export enum TorgiState{
-    Published,
-    ApplicationAcceptance,
+    Published = "Published",
+    ApplicationAcceptance = "ApplicationAcceptance",
 }
 
+
 export enum PropertyType{
-    AgriculturalLand,
-    SettlementsLands,
+    AgriculturalLand = "AgriculturalLand",
+    SettlementsLands = "SettlementsLands",
+}
+
+export enum PropertyForm{
+    Gos= "Gos",
+    RFSubject = "RFSubject",
+    Other = "Other",
+}
+
+export type SearchParam =  PropertyForm | PropertyType | TorgiState;
+
+export interface SmartCheckboxProps{
+    searchParam : SearchParam,
+    dispatch : React.Dispatch<SearchParamsAction>,
+}
+export interface SearchParamsAction{
+    param : SearchParam,
+    isAdd : boolean, 
 }
 
 export interface LotProps{
@@ -31,4 +50,11 @@ export interface LotProps{
     StartCost : number | null,
     PropertyType : PropertyType | null,
     Area : number | null,
+}
+
+export interface LotSearchParams{
+    propertyType : Set<PropertyType>,
+    propertyForm : Set<PropertyForm>,
+    torgiState : Set<TorgiState>,
+
 }
