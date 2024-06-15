@@ -14,6 +14,10 @@ export function Torgi() {
     const forms = ['Государственная (неразграниченная) собственность', 'Иная собственность', 'Собственность субъектов РФ']
     const type = ['Земли сельскохозяйственного назначения', 'Земли населенных пунктов']
     const count = 0;
+    const lotProp : LotProps = {Area: 2, Address: "Мойхуй дом 3", Type: TorgiType.Rent, AuctionStep: 500, Deposit: 1000,
+    Platform: "Калич.ру", State: TorgiState.Published, StartCost: 100, StartDate: new Date('12.02.2003'),
+    EndDate: new Date('12.12.2012'), Link: 'arti.rus', PropertyType: PropertyType.AgriculturalLand,
+        Izveshenie: '[eqqewqeqwe', RFSubject: "Рспублика пидорасов", Id: '228'}
 
     return(
         <Form>
@@ -45,15 +49,7 @@ export function Torgi() {
                     <Form.Label сlassName={"text-center"}>Найдено: {count} </Form.Label>
                 </Row>
                 <FormGroup>
-                    <Row>
-                        <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}>АЛЕЕЕЕЕЕЕЕ</Form.Label>
-                    </Row>
-                    <Row>
-                        <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}>АЛЕЕЕЕЕЕЕЕ</Form.Label>
-                    </Row>
-                    <Row>
-                        <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}>АЛЕЕЕЕЕЕЕЕ</Form.Label>
-                    </Row>
+                    <Lot{...lotProp}></Lot>
                 </FormGroup>
             </Container>
         </Form>
@@ -76,5 +72,45 @@ function DropDownButton(labels : string[], initialLabel : string){
                     />))}
             </DropdownMenu>
         </Dropdown>
+    )
+}
+
+
+export enum TorgiType{
+    Rent = 0,
+    Sale = 1,
+}
+
+export enum TorgiState{
+    Published,
+    ApplicationAcceptance,
+}
+
+export enum PropertyType{
+    AgriculturalLand,
+    SettlementsLands,
+}
+
+export interface LotProps{
+ Id : string | null,
+ Type : TorgiType | null,
+ Platform : string | null,
+ Izveshenie : string | null,
+ State : TorgiState | null,
+ Link : string | null,
+ StartDate : Date | null,
+ EndDate : Date | null, 
+ RFSubject : string | null,
+ Address : string | null,
+ Deposit : number | null,
+ AuctionStep : number | null,
+ StartCost : number | null,
+ PropertyType : PropertyType | null,
+ Area : number | null, 
+}
+
+const Lot = ( props : LotProps) =>{
+    return(
+        <div>{props.Area}</div>
     )
 }
