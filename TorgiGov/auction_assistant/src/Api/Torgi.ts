@@ -26,9 +26,9 @@ const getByParams = (params : LotSearchParams) => {
     method : 'post',
     url: `${API_URL}/GetByParams`,
     data: {
-        PropertyType : pt,
-        TorgiState : JSON.stringify(params.torgiState.values()),
-        PropertyForm : JSON.stringify(params.propertyForm),
+        PropertyType : Array.from(params.propertyType),
+        TorgiState : Array.from(params.torgiState),
+        PropertyForm : Array.from(params.propertyForm),
     }
 })
 }
