@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TorgiGov.CommandHandlers;
+using TorgiGov.DataLayer.ApiLayer;
 using TorgiGov.DataLayer.Entities;
 
 namespace TorgiGov.Controllers;
@@ -20,5 +21,11 @@ public class TorgiController : ControllerBase
     public async Task<Torgi?> Get(Guid id)
     {
         return await _commandHandler.GetBtId(id);
+    }
+    
+    [HttpPost("GetByParams")]
+    public async Task<Torgi[]?> GetByParams([FromBody]TorgiSearchParams torgiSearchParams)
+    {
+        return await _commandHandler.GetByParams(torgiSearchParams);
     }
 }

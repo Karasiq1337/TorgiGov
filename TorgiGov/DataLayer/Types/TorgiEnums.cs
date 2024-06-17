@@ -20,3 +20,9 @@ public enum PropertyType
     AgriculturalLand,
     SettlementsLands,
 }
+
+public enum PropertyForm
+{
+    AgriculturalLand,
+    SettlementsLands,
+}

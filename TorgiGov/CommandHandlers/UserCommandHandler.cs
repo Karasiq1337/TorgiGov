@@ -15,13 +15,13 @@ public class UserCommandHandler(DataContext dataContext) : IUserCommandHandler
 
     public async Task CreateUserAsync(UserDto userDto)
     {
-        await _dataContext.UsersRepository.CreateAsync(userDto.MapToEntity());
-        _dataContext.UsersRepository.SaveChanges();
+        await _dataContext.UsersRepository.AddAsync(userDto.MapToEntity());
+        await _dataContext.SaveChangesAsync();
     }
 
     public bool TryFindByLogin(string login)
     {
-        var result = _dataContext.UsersRepository.GetByLogin(login);
+        var result = _dataContext.UsersRepository.FirstOrDefault(u => u.Login.Equals(login));
         return result is not null;
     }
 }

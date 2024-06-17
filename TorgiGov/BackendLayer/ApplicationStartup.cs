@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using TorgiGov.ApplicationContext;
 using TorgiGov.CommandHandlers;
@@ -36,12 +37,14 @@ public static class ApplicationStartup
 
     private static void CreateWebApplication()
     {
-        _builder.Services.AddControllersWithViews();
         _builder.Services.AddControllers();
         _builder.Services.AddEndpointsApiExplorer();
         _builder.Services.AddSwaggerGen();
         _builder.Services.AddMemoryCache();
-        
+        _builder.Services.AddLogging();
+
+        _builder.Services.AddCors();
+        _builder.Services.AddMvc((options => options.EnableEndpointRouting = false));
         _application =  _builder.Build();
     }
 

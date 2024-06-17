@@ -7,16 +7,16 @@ namespace TorgiGov.ApplicationContext;
 
 public sealed class DataContext : DbContext
 {
-    public readonly UsersRepository UsersRepository;
-    public readonly TorgiRepository TorgiRepository;
+    public readonly DbSet<User> UsersRepository;
+    public readonly DbSet<Torgi> TorgiRepository;
     
     public DataContext(DbContextOptions<DataContext> options)
         :base(options)
     {
         Database.EnsureCreated();
 
-        UsersRepository = new UsersRepository(this);
-        TorgiRepository = new TorgiRepository(this);
+        UsersRepository = Set<User>();
+        TorgiRepository = Set<Torgi>();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

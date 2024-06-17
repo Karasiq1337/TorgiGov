@@ -37,5 +37,7 @@ public class Torgi : IEntity
     public PropertyType PropertyType { get; set; }
 
     public float Area { get; set; }
+    
+    public PropertyForm PropertyForm { get; set; }
 
 }

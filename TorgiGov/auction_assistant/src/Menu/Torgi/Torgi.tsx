@@ -13,6 +13,7 @@ import {
     TorgiState,
     TorgiType
 } from "./Torgi.types";
+import {getTorgiByParams} from "../../Api/Torgi";
 
 export function Torgi() {
     const propertyForms = Object.values(PropertyForm);
@@ -59,7 +60,7 @@ export function Torgi() {
                 </Row>
                 <Row>
                     <Col>
-                        <Button>Найти</Button>
+                        <Button onClick={() => getTorgiByParams(lotsSearchParams)}>Найти</Button>
                     </Col>
                 </Row>
                 <Row className="d-flex justify-content-end">

@@ -56,5 +56,4 @@ export interface LotSearchParams{
     propertyType : Set<PropertyType>,
     propertyForm : Set<PropertyForm>,
     torgiState : Set<TorgiState>,
-
 }
