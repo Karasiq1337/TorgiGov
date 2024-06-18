@@ -13,6 +13,7 @@ app.Use(async (context, next) =>
         string body = await bodyReader.ReadToEndAsync();
         Console.WriteLine(body);
         Console.WriteLine(context.Request.Method);
+        Console.WriteLine(context.Request.ContentType);
         context.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(body));
         await next.Invoke();
         context.Request.Body = initialBody;

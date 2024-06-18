@@ -26,6 +26,7 @@ public class TorgiController : ControllerBase
     [HttpPost("GetByParams")]
     public async Task<Torgi[]?> GetByParams([FromBody]TorgiSearchParams torgiSearchParams)
     {
-        return await _commandHandler.GetByParams(torgiSearchParams);
+        var maBalls = await _commandHandler.GetByParams(torgiSearchParams);
+        return maBalls;
     }
 }

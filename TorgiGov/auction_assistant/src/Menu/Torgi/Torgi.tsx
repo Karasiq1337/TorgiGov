@@ -21,21 +21,19 @@ export function Torgi() {
     const torgiState = Object.values(TorgiState);
     
     const initialLotSearchParams : LotSearchParams = 
-        {propertyForm: new Set<PropertyForm>,  propertyType: new Set<PropertyType>(), torgiState : new Set<TorgiState>()}
+        {propertyForm: new Set<PropertyForm>(Object.values(PropertyForm)), 
+            propertyType: new Set<PropertyType>(Object.values(PropertyType)),
+            torgiState : new Set<TorgiState>(Object.values(TorgiState))}    
     const [lotsSearchParams, dispatchLotsSearchParams] = 
         useReducer(LotsSearchParamsReducer, initialLotSearchParams)
-
+    const [lotsProps, setProps] = useState<LotProps[] | null>()
     const count = 0;
     
-    const [checkedPropertyTypes, setPropertyTypes] = useState(new Set<PropertyType>);
-    
-    
-    const lotProp : LotProps = {Area: 2, Address: "Мойхуй дом 3", Type: TorgiType.Rent, AuctionStep: 500, Deposit: 1000,
-    Platform: "Калич.ру", State: TorgiState.Published, StartCost: 114124124, StartDate: new Date('12.02.2003'),
-    EndDate: new Date('12.12.2012'), Link: 'arti.rus', PropertyType: PropertyType.AgriculturalLand,
-        Izveshenie: '[eqqewqeqwe', RFSubject: "Рспублика пидорасов", Id: '228'}
-    
-    const [lotsProps, setProps] = useState() 
+    async function handleSetLotsProps(){
+        const props = await getTorgiByParams(lotsSearchParams); 
+        setProps(props);
+    }
+
         
     return(
         <Form>
@@ -51,6 +49,7 @@ export function Torgi() {
                 </Row>
                 {DropDownButton(propertyForms, "Форма собственности", dispatchLotsSearchParams)}
                 {DropDownButton(propertyType, "Тип земельного участка", dispatchLotsSearchParams)}
+                {DropDownButton(torgiState, "... торгов", dispatchLotsSearchParams)}
                 <FormGroup>
                     <Form.Check type={'radio'} label={`Аренда`} name="group1"/>
                     <Form.Check type={'radio'} label={`Продажа`} name="group1"/>
@@ -60,17 +59,23 @@ export function Torgi() {
                 </Row>
                 <Row>
                     <Col>
-                        <Button onClick={() => getTorgiByParams(lotsSearchParams)}>Найти</Button>
+                        <Button onClick={() => handleSetLotsProps()}>Найти</Button>
                     </Col>
                 </Row>
                 <Row className="d-flex justify-content-end">
                     <Form.Label сlassName={"text-center"}>Найдено: {count} </Form.Label>
                 </Row>
                 <FormGroup>
-                    <Lot{...lotProp}></Lot>
+                    {LotList(lotsProps)}
                 </FormGroup>
             </Container>
         </Form>
+    )
+}
+
+const LotList = (props : LotProps[] | null | undefined) =>{
+    return(
+        (props) && props.map(p => <Lot{...p}/>)
     )
 }
 
@@ -131,6 +136,7 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
             className={'ms-2 me-2'}
             type={'checkbox'}
             label={searchParam.toString()}
+            defaultChecked={true}
             onChange={() => {
                 isChecked = !isChecked;
                 dispatch({param: searchParam, isAdd: isChecked});

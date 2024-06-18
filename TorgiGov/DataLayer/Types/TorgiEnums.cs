@@ -4,25 +4,26 @@ namespace TorgiGov.DataLayer.Types;
 
 public enum TorgiType
 {
-    Rent,
-    Selling,
+    Rent = 0,
+    Selling = 1,
 }
 
 public enum TorgiState
 {
-    Published,
-    ApplicationAcceptance,
+    Published = 0,
+    ApplicationAcceptance = 1,
 }
 
 
 public enum PropertyType
 {
-    AgriculturalLand,
-    SettlementsLands,
+    AgriculturalLand = 0,
+    SettlementsLands = 1,
 }
 
 public enum PropertyForm
 {
-    AgriculturalLand,
-    SettlementsLands,
+    Gos= 0,
+    RFSubject = 1,
+    Other = 2,
 }

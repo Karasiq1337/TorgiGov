@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using TorgiGov.ApplicationContext;
 using TorgiGov.CommandHandlers;
 using TorgiGov.Configs;
-using TorgiGov.DataLayer;
 
 namespace TorgiGov.ApplicationLayer;
 
@@ -37,7 +36,10 @@ public static class ApplicationStartup
 
     private static void CreateWebApplication()
     {
-        _builder.Services.AddControllers();
+        _builder.Services.AddControllers().AddJsonOptions(o =>
+        {
+            o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
         _builder.Services.AddEndpointsApiExplorer();
         _builder.Services.AddSwaggerGen();
         _builder.Services.AddMemoryCache();
