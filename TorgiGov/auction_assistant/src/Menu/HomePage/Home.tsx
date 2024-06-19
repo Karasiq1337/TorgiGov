@@ -49,21 +49,19 @@ export function Home(){
                     </ListGroup>
                     <h3 className={'ms-4 mt-2'}><em>Сравнение лотов</em></h3>
                     <ListGroup as="ol">
-                        <ListGroup.Item as="li" variant={'primary'}>Удобство в использывании</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Только актуальные торги</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Сохраняйте понравившиеся лоты</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Избранные вами лоты сравниваются</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Получайте оптимальный вариант торга</ListGroup.Item>
                     </ListGroup>
                     <h3 className={'ms-4 mt-2'}><em>Избранное</em></h3>
                     <ListGroup as="ol">
-                        <ListGroup.Item as="li" variant={'primary'}>Удобство в использывании</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Только актуальные торги</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Сохраняйте понравившиеся лоты</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Понравившиеся лоты находятся здесь</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Извещение</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Информация об организаторе торгов</ListGroup.Item>
                     </ListGroup>
                         <h3 className={'ms-4 mt-2'}><em>Статистика</em></h3>
                     <ListGroup as="li">
-                        <ListGroup.Item as="li" variant={'primary'}>Удобство в использывании</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Только актуальные торги</ListGroup.Item>
-                        <ListGroup.Item as="li" variant={'primary'}>Сохраняйте понравившиеся лоты</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Анализируйте решениях других польователей</ListGroup.Item>
+                        <ListGroup.Item as="li" variant={'primary'}>Основана на выборах реальных людей</ListGroup.Item>
                     </ListGroup>
                     </Form>
                 </Col>
