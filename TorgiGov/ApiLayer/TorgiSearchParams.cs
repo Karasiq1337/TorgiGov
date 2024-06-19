@@ -2,9 +2,9 @@
 
 namespace TorgiGov.DataLayer.ApiLayer;
 
-public class TorgiSearchParams(PropertyType[]? propertyType, PropertyForm[]? propertyForm, TorgiState[]? torgiState)
+public class TorgiSearchParams(string[]? propertyType, string[]? propertyForm, string[]? torgiState)
 {
-    public PropertyType[] PropertyType { get; set; } = propertyType ?? Array.Empty<PropertyType>();
-    public PropertyForm[] PropertyForm { get; set; } = propertyForm ?? Array.Empty<PropertyForm>();
-    public TorgiState[] TorgiState { get; set; } = torgiState ?? Array.Empty<TorgiState>();
+    public string[] PropertyType { get; set; } = propertyType ?? Array.Empty<string>();
+    public string[] PropertyForm { get; set; } = propertyForm ?? Array.Empty<string>();
+    public string[] TorgiState { get; set; } = torgiState ?? Array.Empty<string>();
 }

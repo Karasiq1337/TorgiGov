@@ -7,20 +7,20 @@ export enum TorgiType{
 }
 
 export enum TorgiState{
-    Published = "Published",
-    ApplicationAcceptance = "ApplicationAcceptance",
+    Published = "Опубликован",
+    ApplicationAcceptance = "Прием заявок",
 }
 
 
 export enum PropertyType{
-    AgriculturalLand = "AgriculturalLand",
-    SettlementsLands = "SettlementsLands",
+    AgriculturalLand = "Земли сельскохозяйственного назначения",
+    SettlementsLands = "Земли населенных пунктов",
 }
 
 export enum PropertyForm{
-    Gos= "Gos",
-    RFSubject = "RFSubject",
-    Other = "Other",
+    Gos= "Государственная собственность (неразграниченная)",
+    RFSubject = "Собственность субъектов РФ",
+    Other = "Муниципальная собственность",
 }
 
 export type SearchParam =  PropertyForm | PropertyType | TorgiState;

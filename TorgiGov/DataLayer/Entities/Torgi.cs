@@ -7,13 +7,7 @@ public class Torgi : IEntity
 {
     public Guid Id { get; set; }
 
-    public TorgiType Type { get; set; }
-
     public string? Platform { get; set; }
-    
-    public string? Izveshenie { get; set; }
-    
-    public TorgiState State { get; set; }
 
     public string? Link { get; set; }
     
@@ -25,19 +19,18 @@ public class Torgi : IEntity
     
     public string? Address { get; set; }
     
-    [Column(TypeName="money")]
-    public int Deposit { get; set; }
-
-    [Column(TypeName="money")]
-    public int AuctionStep { get; set; }
-
-    [Column(TypeName="money")]
-    public int StartCost { get; set; }
-
-    public PropertyType PropertyType { get; set; }
-
-    public float Area { get; set; }
+    public int? Deposit { get; set; }
     
-    public PropertyForm PropertyForm { get; set; }
+    public int? AuctionStep { get; set; }
+    
+    public int? StartCost { get; set; }
+    public string? State { get; set; }
 
+    public string? PropertyType { get; set; }
+
+    public float? Area { get; set; }
+    
+    public string? PropertyForm { get; set; }
+
+    public string? Vid { get; set; }
 }

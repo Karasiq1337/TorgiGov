@@ -27,9 +27,9 @@ export async function getTorgi(id : string) : Promise<LotProps | null>{
 }
 
 interface SearchRequestBody {
-    PropertyType : Array<number>,
-    TorgiState : Array<number>,
-    PropertyForm : Array<number>,
+    PropertyType : Array<string>,
+    TorgiState : Array<string>,
+    PropertyForm : Array<string>,
 }
 const getByParams = (params : LotSearchParams) => {
     const body = mapToServerType(params);
@@ -42,9 +42,9 @@ const getByParams = (params : LotSearchParams) => {
 }
 
 function mapToServerType(params : LotSearchParams) : SearchRequestBody{
-    const propertyForm = mapEnum(params.propertyForm);
-    const propertyTypes = mapEnum(params.propertyType);
-    const torgiStates = mapEnum(params.torgiState);
+    const propertyForm = Array.from(params.propertyForm);
+    const propertyTypes = Array.from(params.propertyType);
+    const torgiStates = Array.from(params.torgiState);
     
     return { PropertyForm : propertyForm, PropertyType : propertyTypes, TorgiState : torgiStates}
     

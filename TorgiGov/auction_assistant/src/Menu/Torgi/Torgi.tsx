@@ -1,4 +1,4 @@
-﻿import React, {FC, useReducer, useState} from "react";
+﻿import React, {createContext, FC, useContext, useReducer, useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Col, Container, Dropdown, DropdownMenu, FormGroup, Row,} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -15,22 +15,32 @@ import {
 } from "./Torgi.types";
 import {getTorgiByParams} from "../../Api/Torgi";
 
+const TorgiContext = createContext<LotSearchParams>(
+    {
+    propertyForm: new Set<PropertyForm>(),
+    propertyType: new Set<PropertyType>(),
+    torgiState : new Set<TorgiState>(),
+    })
+
+const useTorgiContext = () => useContext(TorgiContext);
+
 export function Torgi() {
     const propertyForms = Object.values(PropertyForm);
     const propertyType = Object.values(PropertyType);
     const torgiState = Object.values(TorgiState);
     
     const initialLotSearchParams : LotSearchParams = 
-        {propertyForm: new Set<PropertyForm>(Object.values(PropertyForm)), 
-            propertyType: new Set<PropertyType>(Object.values(PropertyType)),
-            torgiState : new Set<TorgiState>(Object.values(TorgiState))}    
+        {propertyForm: new Set<PropertyForm>(), 
+            propertyType: new Set<PropertyType>(),
+            torgiState : new Set<TorgiState>()}    
     const [lotsSearchParams, dispatchLotsSearchParams] = 
         useReducer(LotsSearchParamsReducer, initialLotSearchParams)
     const [lotsProps, setProps] = useState<LotProps[] | null>()
-    const count = 0;
+    const [count, setCount] = useState<number | null>(0);
     
     async function handleSetLotsProps(){
-        const props = await getTorgiByParams(lotsSearchParams); 
+        const props = await getTorgiByParams(lotsSearchParams);
+        setCount(props && props.length);
         setProps(props);
     }
 
@@ -47,9 +57,11 @@ export function Torgi() {
                 <Row>
                     <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
                 </Row>
-                {DropDownButton(propertyForms, "Форма собственности", dispatchLotsSearchParams)}
-                {DropDownButton(propertyType, "Тип земельного участка", dispatchLotsSearchParams)}
-                {DropDownButton(torgiState, "... торгов", dispatchLotsSearchParams)}
+                <TorgiContext.Provider value={lotsSearchParams}>
+                    {DropDownButton(propertyForms, "Форма собственности", dispatchLotsSearchParams)}
+                    {DropDownButton(propertyType, "Тип земельного участка", dispatchLotsSearchParams)}
+                    {DropDownButton(torgiState, "Состояние торгов", dispatchLotsSearchParams)}
+                </TorgiContext.Provider>
                 <FormGroup>
                     <Form.Check type={'radio'} label={`Аренда`} name="group1"/>
                     <Form.Check type={'radio'} label={`Продажа`} name="group1"/>
@@ -63,7 +75,7 @@ export function Torgi() {
                     </Col>
                 </Row>
                 <Row className="d-flex justify-content-end">
-                    <Form.Label сlassName={"text-center"}>Найдено: {count} </Form.Label>
+                    <Form.Label сlassName={"text-center"}>Найдено: {!!count ? count : 0 } </Form.Label>
                 </Row>
                 <FormGroup>
                     {LotList(lotsProps)}
@@ -129,17 +141,32 @@ function DropDownButton(params : SearchParam[], initialLabel : string, changeFun
 }
 
 const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
-    let isChecked = false;
+    const context = useTorgiContext();
+    const isChecked = () => {
+        switch (searchParam){   
+            case PropertyForm.RFSubject:
+            case PropertyForm.Gos:
+            case PropertyForm.Other:
+                return context.propertyForm.has(searchParam);
+            case PropertyType.AgriculturalLand:
+            case PropertyType.SettlementsLands:
+                return context.propertyType.has(searchParam);
+            case TorgiState.ApplicationAcceptance:
+            case TorgiState.Published:
+                return context.torgiState.has(searchParam);
+            default:
+                return false;
+        }
+    };
     
     return(
         <Form.Check
             className={'ms-2 me-2'}
             type={'checkbox'}
             label={searchParam.toString()}
-            defaultChecked={true}
+            defaultChecked={isChecked()}
             onChange={() => {
-                isChecked = !isChecked;
-                dispatch({param: searchParam, isAdd: isChecked});
+                dispatch({param: searchParam, isAdd: !isChecked()});
             }}
         />  
     )
