@@ -30,6 +30,7 @@ interface SearchRequestBody {
     PropertyType : Array<string>,
     TorgiState : Array<string>,
     PropertyForm : Array<string>,
+    TorgiType : Array<string>,
 }
 const getByParams = (params : LotSearchParams) => {
     const body = mapToServerType(params);
@@ -37,16 +38,25 @@ const getByParams = (params : LotSearchParams) => {
     return axios<any[]>({
     method : 'post',
     url: `${API_URL}/GetByParams`,
-    data: {TorgiState : body.TorgiState, PropertyType : body.PropertyType, PropertyForm : body.PropertyForm},
+    data: {TorgiState : body.TorgiState, PropertyType : body.PropertyType, 
+        PropertyForm : body.PropertyForm, TorgiType : body.TorgiType},
     })
 }
 
 function mapToServerType(params : LotSearchParams) : SearchRequestBody{
-    const propertyForm = Array.from(params.propertyForm);
-    const propertyTypes = Array.from(params.propertyType);
-    const torgiStates = Array.from(params.torgiState);
-    
-    return { PropertyForm : propertyForm, PropertyType : propertyTypes, TorgiState : torgiStates}
+    let propertyForm = Array.from(params.propertyForm);
+    if (propertyForm.length === 0) 
+        propertyForm = Object.values(PropertyForm);
+    let propertyTypes = Array.from(params.propertyType);
+    if (propertyTypes.length === 0)
+        propertyTypes = Object.values(PropertyType);
+    let torgiStates = Array.from(params.torgiState);
+    if (torgiStates.length === 0)
+        torgiStates = Object.values(TorgiState);
+    let torgiType = Array.from(params.torgiType);
+    if (torgiType.length === 0)
+        torgiType = Object.values(torgiType);
+    return { PropertyForm : propertyForm, PropertyType : propertyTypes, TorgiState : torgiStates, TorgiType : torgiType}
     
 } 
 

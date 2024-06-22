@@ -19,10 +19,18 @@ const TorgiContext = createContext<LotSearchParams>(
     {
     propertyForm: new Set<PropertyForm>(),
     propertyType: new Set<PropertyType>(),
-    torgiState : new Set<TorgiState>(),
+    torgiState : new Set<TorgiState>(), 
+    torgiType : new Set<TorgiType>(),
     })
 
 const useTorgiContext = () => useContext(TorgiContext);
+
+function RentRadio(dispatch : React.Dispatch<SearchParamsAction>) {
+    return <FormGroup>
+        <SmartCheckBox type={'checkbox'} searchParam={TorgiType.Rent} dispatch={dispatch}/>
+        <SmartCheckBox type={'checkbox'} searchParam={TorgiType.Sale} dispatch={dispatch}/>
+    </FormGroup>;
+}
 
 export function Torgi() {
     const propertyForms = Object.values(PropertyForm);
@@ -32,7 +40,8 @@ export function Torgi() {
     const initialLotSearchParams : LotSearchParams = 
         {propertyForm: new Set<PropertyForm>(), 
             propertyType: new Set<PropertyType>(),
-            torgiState : new Set<TorgiState>()}    
+            torgiState : new Set<TorgiState>(),
+            torgiType : new Set<TorgiType>()}    
     const [lotsSearchParams, dispatchLotsSearchParams] = 
         useReducer(LotsSearchParamsReducer, initialLotSearchParams)
     const [lotsProps, setProps] = useState<LotProps[] | null>()
@@ -43,45 +52,45 @@ export function Torgi() {
         setCount(props && props.length);
         setProps(props);
     }
-
-        
+    
     return(
-        <Form>
-            <Container>
-                <Row>
-                    <Col>
-                        <h1 className={"text-center"}>Вы тут</h1>
-                        <Form.Label сlassName={"text-center"}>Здесь вы можете просмотреть лоты</Form.Label>
-                    </Col>
-                </Row>
-                <Row>
-                    <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
-                </Row>
-                <TorgiContext.Provider value={lotsSearchParams}>
-                    {DropDownButton(propertyForms, "Форма собственности", dispatchLotsSearchParams)}
-                    {DropDownButton(propertyType, "Тип земельного участка", dispatchLotsSearchParams)}
-                    {DropDownButton(torgiState, "Состояние торгов", dispatchLotsSearchParams)}
-                </TorgiContext.Provider>
-                <FormGroup>
-                    <Form.Check type={'radio'} label={`Аренда`} name="group1"/>
-                    <Form.Check type={'radio'} label={`Продажа`} name="group1"/>
-                </FormGroup>
-                <Row>
-                    <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
-                </Row>
-                <Row>
-                    <Col>
-                        <Button onClick={() => handleSetLotsProps()}>Найти</Button>
-                    </Col>
-                </Row>
-                <Row className="d-flex justify-content-end">
-                    <Form.Label сlassName={"text-center"}>Найдено: {!!count ? count : 0 } </Form.Label>
-                </Row>
-                <FormGroup>
-                    {LotList(lotsProps)}
-                </FormGroup>
-            </Container>
-        </Form>
+        <TorgiContext.Provider value={lotsSearchParams}>
+            <Form>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1 className={"text-center"}>Вы тут</h1>
+                            <Form.Label сlassName={"text-center"}>Здесь вы можете просмотреть лоты</Form.Label>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Form.Label expand={"lg"}
+                                    className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
+                    </Row>
+                   
+                        {DropDownButton(propertyForms, "Форма собственности", dispatchLotsSearchParams)}
+                        {DropDownButton(propertyType, "Тип земельного участка", dispatchLotsSearchParams)}
+                        {DropDownButton(torgiState, "Состояние торгов", dispatchLotsSearchParams)}
+                    
+                    {RentRadio(dispatchLotsSearchParams)}
+                    <Row>
+                        <Form.Label expand={"lg"}
+                                    className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button onClick={() => handleSetLotsProps()}>Найти</Button>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex justify-content-end">
+                        <Form.Label сlassName={"text-center"}>Найдено: {!!count ? count : 0} </Form.Label>
+                    </Row>
+                    <FormGroup>
+                        {LotList(lotsProps)}
+                    </FormGroup>
+                </Container>
+            </Form>
+        </TorgiContext.Provider>
     )
 }
 
@@ -101,7 +110,6 @@ function LotsSearchParamsReducer(state : LotSearchParams, action: SearchParamsAc
                 state.propertyForm.add(param)
             else 
                 state.propertyForm.delete(param)
-            console.log(state.propertyForm)
             return state
         case PropertyType.AgriculturalLand:
         case PropertyType.SettlementsLands:
@@ -109,7 +117,6 @@ function LotsSearchParamsReducer(state : LotSearchParams, action: SearchParamsAc
                 state.propertyType.add(param)
             else
                 state.propertyType.delete(param)
-            console.log(state.propertyType)
             return state
         case TorgiState.ApplicationAcceptance:
         case TorgiState.Published:
@@ -117,7 +124,14 @@ function LotsSearchParamsReducer(state : LotSearchParams, action: SearchParamsAc
                 state.torgiState.add(param)
             else
                 state.torgiState.delete(param)
-            console.log(state.torgiState)
+            return state
+        case TorgiType.Sale:
+        case TorgiType.Rent:
+            if(isAdd)
+                state.torgiType.add(param)
+            else
+                state.torgiType.delete(param)
+            console.log(state);
             return state
         default:
             return state;
@@ -133,14 +147,14 @@ function DropDownButton(params : SearchParam[], initialLabel : string, changeFun
             </Dropdown.Toggle>
             <DropdownMenu>
                 {params.map((l) => (
-                    <SmartCheckBox searchParam={l} dispatch={changeFunk}/>
+                    <SmartCheckBox searchParam={l} dispatch={changeFunk} type={'checkbox'}/>
                     ))}
             </DropdownMenu>
         </Dropdown>
     )
 }
 
-const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
+const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch, type}) =>{
     const context = useTorgiContext();
     const isChecked = () => {
         switch (searchParam){   
@@ -154,6 +168,9 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
             case TorgiState.ApplicationAcceptance:
             case TorgiState.Published:
                 return context.torgiState.has(searchParam);
+            case TorgiType.Sale:
+            case TorgiType.Rent:
+                return context.torgiType.has(searchParam);
             default:
                 return false;
         }
@@ -162,7 +179,7 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
     return(
         <Form.Check
             className={'ms-2 me-2'}
-            type={'checkbox'}
+            type={type}
             label={searchParam.toString()}
             defaultChecked={isChecked()}
             onChange={() => {
@@ -175,7 +192,7 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch}) =>{
 function CreateTitle(props : LotProps) : string{
     const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
     const propertyType = props.PropertyType == PropertyType.AgriculturalLand ? "сельскохозяйственного назначения" 
-        : "начелённых пунктов";
+        : "наcелённых пунктов";
     const address = props.Address != null ? `по адресу ${props.Address}` : '';
     
     return `${type} земель ${propertyType} ${address}` 

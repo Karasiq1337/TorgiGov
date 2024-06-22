@@ -2,8 +2,8 @@
 
 
 export enum TorgiType{
-    Rent = "Rent",
-    Sale = "Sale",
+    Rent = "Аренда",
+    Sale = "Продажа",
 }
 
 export enum TorgiState{
@@ -23,11 +23,12 @@ export enum PropertyForm{
     Other = "Муниципальная собственность",
 }
 
-export type SearchParam =  PropertyForm | PropertyType | TorgiState;
+export type SearchParam =  PropertyForm | PropertyType | TorgiState | TorgiType;
 
 export interface SmartCheckboxProps{
     searchParam : SearchParam,
     dispatch : React.Dispatch<SearchParamsAction>,
+    type : 'checkbox' | 'radio',
 }
 export interface SearchParamsAction{
     param : SearchParam,
@@ -56,4 +57,5 @@ export interface LotSearchParams{
     propertyType : Set<PropertyType>,
     propertyForm : Set<PropertyForm>,
     torgiState : Set<TorgiState>,
+    torgiType :  Set<TorgiType>,
 }

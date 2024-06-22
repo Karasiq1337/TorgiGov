@@ -29,4 +29,4 @@ public class TorgiController : ControllerBase
         var maBalls = await _commandHandler.GetByParams(torgiSearchParams);
         return maBalls;
     }
-}
+}   

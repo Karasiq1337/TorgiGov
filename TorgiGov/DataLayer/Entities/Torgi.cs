@@ -33,4 +33,5 @@ public class Torgi : IEntity
     public string? PropertyForm { get; set; }
 
     public string? Vid { get; set; }
+    public string? TorgiType { get; set; }
 }

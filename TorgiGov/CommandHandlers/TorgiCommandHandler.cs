@@ -28,6 +28,7 @@ public class TorgiCommandHandler : ITorgiCommandHandler
     public async Task<Torgi[]> GetByParams(TorgiSearchParams searchParams)
     {
         return await _dataContext.TorgiRepository
+            .Where(t => searchParams.TorgiType.Contains(t.TorgiType))
             .Where(t => searchParams.PropertyType.Contains(t.PropertyType))
             .Where(t => searchParams.TorgiState.Contains(t.State))
             .Where(t => searchParams.PropertyForm.Contains(t.PropertyForm))
