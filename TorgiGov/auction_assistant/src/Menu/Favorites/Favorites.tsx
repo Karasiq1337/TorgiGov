@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import {Col, Container, FormGroup, FormLabel, Row} from "react-bootstrap";
-import Lot from "../Torgi/Torgi";
+import {Lot} from "../Torgi/Torgi";
 import Button from "react-bootstrap/Button";
 
 

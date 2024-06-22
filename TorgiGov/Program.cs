@@ -11,9 +11,11 @@ app.Use(async (context, next) =>
     using (var bodyReader = new StreamReader(context.Request.Body))
     {
         string body = await bodyReader.ReadToEndAsync();
-        Console.WriteLine(body);
+        Console.WriteLine(context.Request.Path);
         Console.WriteLine(context.Request.Method);
         Console.WriteLine(context.Request.ContentType);
+        Console.WriteLine(context.Request.Query.ToString());
+        Console.WriteLine(body);
         context.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(body));
         await next.Invoke();
         context.Request.Body = initialBody;

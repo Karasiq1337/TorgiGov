@@ -4,20 +4,61 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useAppDispatch} from "../../AppHooks";
 import {hideReg} from "./AuthReducer";
+import {checkLogin, reg} from "../../Api/Users";
 
 
-const  RegModal = () => {
+const RegModal = () => {
     const dispatch = useAppDispatch();
     const [show, setShow] = useState(false);
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
+    const [showWrong, setShowWrong] = useState(false);
+    const [wrongModalText, setWrongModalText] = useState('');
     
     useEffect(() => {
         setShow(true);
     }, []);
-    const handleclose = () => dispatch(hideReg());
-    
+    const handleClose = () => dispatch(hideReg());
+
+    async function trySignIn() : Promise<boolean | any>{
+        if(password !== repeatPassword){
+            setWrongModalText("Пароли не совпадают");
+            setShowWrong(true);
+            return;
+        }
+        if (await checkLogin(login)){
+            setWrongModalText("Логин занят")
+            setShowWrong(true);
+            return;
+        }
+        const regIsOk = await reg(login, password);
+        if (!regIsOk){
+            setWrongModalText("Не удалось зарегестрироваться")
+            setShowWrong(true);
+            return; 
+        }
+    }
+
+    const wrongRegParamModal = (text : string) => {
+        return <Modal show={showWrong} onHide={() => setShowWrong(false)}>
+            <Modal.Header closeButton>
+                <ModalTitle>Не получилось зарегестрироваться</ModalTitle>
+            </Modal.Header>
+            <ModalBody>
+                <Form>
+                    <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
+                        {text}
+                    </Form.Label>
+                </Form>
+            </ModalBody>
+        </Modal>
+    }
     
     return (
-        <Modal show={show} onHide={handleclose}>
+        <>
+            {showWrong && wrongRegParamModal(wrongModalText)}
+            <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <ModalTitle>Регистрация</ModalTitle>
             </Modal.Header>
@@ -25,23 +66,27 @@ const  RegModal = () => {
                 <Form>
                     <FormGroup controlId={'FromBasicLogin'}>
                         <FormLabel>Логин</FormLabel>
-                        <FormControl type={'login'} placeholder={"Придумайте логин"}/>
+                        <FormControl type={'login'} placeholder={"Придумайте логин"}
+                                     onChange={(e) => setLogin(e.target.value)}/>
                     </FormGroup>
                     <FormGroup controlId={'FromBasicPassword'} className={'mb-3 mt-2'}>
                         <FormLabel>Пароль</FormLabel>
-                        <FormControl type={'Password'} placeholder={"Придумайте пароль"}/>
+                        <FormControl type={'Password'} placeholder={"Придумайте пароль"}
+                                     onChange={(e) => setPassword(e.target.value)}/>
                     </FormGroup>
                     <FormGroup controlId={'FromBasicPassword'} className={'mb-3'}>
-                        <FormControl type={'Password'} placeholder={"Повторите пароль"}/>
+                        <FormControl type={'Password'} placeholder={"Повторите пароль"}
+                                     onChange={(e) => setRepeatPassword(e.target.value)}/>
                     </FormGroup>
                     <FormGroup controlId={'FromBasicButton'}>
-                        <Button className={'bg-primary'}>Зарегистрироваться</Button>
+                        <Button className={'bg-primary'} onClick={() => trySignIn()}>Зарегистрироваться</Button>
                     </FormGroup>
                 </Form>
             </ModalBody>
         </Modal>
+        </>
     )
 }
-  
-  export default RegModal;
+
+export default RegModal;
   

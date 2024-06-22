@@ -199,7 +199,7 @@ function CreateTitle(props : LotProps) : string{
         
 }
 
-const Lot = ( props : LotProps) =>{
+export const Lot = ( props : LotProps) =>{
     return(
         <Form className={"text-center border border-primary bg-body-tertiary "}>
                 <Row>

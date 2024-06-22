@@ -23,7 +23,7 @@ public static class UserExtension
         return new User (userDto.Login, passwordHash)
         {
             Id = Guid.NewGuid(),
-            Login = userDto.Login.ToLower(),
+            Login = userDto.Login,
             Password = passwordHash,
         };
     }

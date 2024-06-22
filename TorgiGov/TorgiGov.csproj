@@ -32,8 +32,4 @@
       <_ContentIncludedByDefault Remove="frontend\package-lock.json" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="auction_assistant\src\Api\" />
-    </ItemGroup>
-
 </Project>

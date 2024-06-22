@@ -10,8 +10,7 @@ public class UsersController(IUserCommandHandler userCommandHandler) : Controlle
 {
     private readonly IUserCommandHandler _userCommandHandler = userCommandHandler;
     
-    [HttpPut]
-    [Route("/[controller]/create/")]
+    [HttpPost("create")]
     public async Task<IActionResult> CreateUser(UserDto userDto)
     {
        if (_userCommandHandler.TryFindByLogin(userDto.Login))
@@ -21,10 +20,15 @@ public class UsersController(IUserCommandHandler userCommandHandler) : Controlle
        return Ok();
     }
 
-    [HttpGet]
-    [Route("/[controller]/checkLogin")]
-    public bool UserWithLoginExists(string login)
+    [HttpPost("checkLogin")]
+    public bool CheckLogin([FromBody]CheckLoginRequest request)
     {
-        return _userCommandHandler.TryFindByLogin(login);
+        return _userCommandHandler.TryFindByLogin(request.Login);
+    }
+
+    [HttpPost("login")]
+    public async Task<bool> Login([FromBody]UserDto userDto)
+    {
+        return await _userCommandHandler.TryLogin(userDto);
     }
 }

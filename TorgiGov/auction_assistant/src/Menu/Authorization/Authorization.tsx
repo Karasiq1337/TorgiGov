@@ -8,20 +8,20 @@ import {useAppDispatch, useAppSelector} from "../../AppHooks";
 
 const Authorization = () =>{
     const dispatch = useAppDispatch();
-    const login = useAppSelector((state) => state.authReducer.login);
     const isLogged = useAppSelector((state) => state.authReducer.isLogged);
-    const [textInput, setTextInput] = useState('');
-
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('')
+    
     if(!isLogged){
         return (
             <InputGroup className="">
                 <Form.Control type={"text"} placeholder={"Логин"}
                               className={"form-control me-3"}
-                              onChange={(e) => setTextInput(e.target.value)}/>
-                <Form.Control type={"password"} placeholder={"Пароль"}
-                              className={"form-control me-3"} />
+                              onChange={(e) => setLogin(e.target.value)}/>
+                <Form.Control type={"password"} placeholder={"Пароль"} className={"form-control me-3"}
+                              onChange={(e) => setPassword(e.target.value)}/>
                 <Button type={"submit"} className={"btn btn-primary me-3"}
-                        onClick={() => dispatch(logIn(textInput))}>Вход</Button>
+                        onClick={() => dispatch(logIn(login))}>Вход</Button>
                 <Button type={"submit"} 
                         onClick={() => dispatch(showReg())}>Регистрация</Button>
             </InputGroup>  
