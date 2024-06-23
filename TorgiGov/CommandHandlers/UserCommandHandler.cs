@@ -32,8 +32,10 @@ public class UserCommandHandler(DataContext dataContext) : IUserCommandHandler
         var dbUser = await _dataContext.UsersRepository
             .Where(user => user.Login == userDto.Login)
             .FirstOrDefaultAsync();
+        if (dbUser == null)
+            return false;
         var password = userDto.MapToEntity().Password;
-        if (password.SequenceEqual(dbUser?.Password))
+        if (password.SequenceEqual(dbUser.Password))
             return true;
         return false;
     }

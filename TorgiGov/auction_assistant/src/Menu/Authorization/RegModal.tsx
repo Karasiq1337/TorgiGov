@@ -3,7 +3,7 @@ import {FormCheck, FormControl, FormGroup, FormLabel, FormText, Modal, ModalBody
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useAppDispatch} from "../../AppHooks";
-import {hideReg} from "./AuthReducer";
+import {hideReg, regSuccess} from "./AuthReducer";
 import {checkLogin, reg} from "../../Api/Users";
 
 
@@ -22,6 +22,11 @@ const RegModal = () => {
     const handleClose = () => dispatch(hideReg());
 
     async function trySignIn() : Promise<boolean | any>{
+        if(password.length < 8){
+            setWrongModalText("Пароль не может быть меньше 8 символов");
+            setShowWrong(true);
+            return;
+        }
         if(password !== repeatPassword){
             setWrongModalText("Пароли не совпадают");
             setShowWrong(true);
@@ -38,13 +43,12 @@ const RegModal = () => {
             setShowWrong(true);
             return; 
         }
+        dispatch(regSuccess());
+        setShow(false);
     }
 
     const wrongRegParamModal = (text : string) => {
         return <Modal show={showWrong} onHide={() => setShowWrong(false)}>
-            <Modal.Header closeButton>
-                <ModalTitle>Не получилось зарегестрироваться</ModalTitle>
-            </Modal.Header>
             <ModalBody>
                 <Form>
                     <Form.Label expand={"lg"} className={" bg-body-tertiary"}>

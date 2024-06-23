@@ -3,14 +3,26 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React, {useState} from "react";
-import {logIn, logOut, showReg} from "./AuthReducer";
+import {logIn, logInFail, logOut, showReg} from "./AuthReducer";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
+import {login as apiLogin}  from "../../Api/Users";
 
 const Authorization = () =>{
     const dispatch = useAppDispatch();
     const isLogged = useAppSelector((state) => state.authReducer.isLogged);
-    const [login, setLogin] = useState('');
+    const [login, setLogin] = useState(
+        useAppSelector((state) => state.authReducer.login)
+    );
     const [password, setPassword] = useState('')
+    
+    async function handleLogin(){
+        const logSuccess = await apiLogin(login, password);
+        if(logSuccess === true){
+            dispatch(logIn(login));
+            return;
+        }
+        dispatch(logInFail());
+    }
     
     if(!isLogged){
         return (
@@ -21,7 +33,7 @@ const Authorization = () =>{
                 <Form.Control type={"password"} placeholder={"Пароль"} className={"form-control me-3"}
                               onChange={(e) => setPassword(e.target.value)}/>
                 <Button type={"submit"} className={"btn btn-primary me-3"}
-                        onClick={() => dispatch(logIn(login))}>Вход</Button>
+                        onClick={() => handleLogin()}>Вход</Button>
                 <Button type={"submit"} 
                         onClick={() => dispatch(showReg())}>Регистрация</Button>
             </InputGroup>  
