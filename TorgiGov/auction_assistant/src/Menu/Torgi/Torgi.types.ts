@@ -51,6 +51,7 @@ export interface LotProps{
     StartCost : number | null,
     PropertyType : PropertyType | null,
     Area : number | null,
+    Rent : number | null,
 }
 
 export interface LotSearchParams{

@@ -8,13 +8,12 @@ import {useAppSelector} from "./AppHooks";
 import RegModal from "./Menu/Authorization/RegModal";
 import {Favorites} from "./Menu/Favorites/Favorites";
 import {CompareLotsRent} from "./Menu/CompareLots/CompareLotsRent";
-import CompareModal from "./Menu/CompareLots/CompareModal";
 import BestOption from "./Menu/BestOption/BestOption";
 import {AuthModal} from "./Menu/Authorization/AuthModal";
 
 
 function App(){
-    const regClicked : boolean = useAppSelector((state) => state.authReducer.regClicked);
+    const regClicked : boolean = useAppSelector((state) => state.reducer.auth.regClicked);
     
   return (  
       <>

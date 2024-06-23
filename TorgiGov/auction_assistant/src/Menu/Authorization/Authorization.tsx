@@ -9,9 +9,9 @@ import {login as apiLogin}  from "../../Api/Users";
 
 const Authorization = () =>{
     const dispatch = useAppDispatch();
-    const isLogged = useAppSelector((state) => state.authReducer.isLogged);
+    const isLogged = useAppSelector((state) => state.reducer.auth.isLogged);
     const [login, setLogin] = useState(
-        useAppSelector((state) => state.authReducer.login)
+        useAppSelector((state) => state.reducer.auth.login)
     );
     const [password, setPassword] = useState('')
     

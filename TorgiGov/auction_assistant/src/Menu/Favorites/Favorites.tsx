@@ -1,11 +1,16 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import {Col, Container, FormGroup, FormLabel, Row} from "react-bootstrap";
-import {Lot} from "../Torgi/Torgi";
-import Button from "react-bootstrap/Button";
+import {useAppSelector} from "../../AppHooks";
+import {LotList} from "../Torgi/Lots";
+import {TorgiType} from "../Torgi/Torgi.types";
 
 
 export function Favorites() {
+    const favoriteLots = useAppSelector((state) => state.reducer.torgi.lots);
+    const rentLots = favoriteLots.filter(lot => lot.Type === TorgiType.Rent);
+    const saleLots = favoriteLots.filter(lot => lot.Type === TorgiType.Sale);
+    
     return (
         <Form>
             <Container>
@@ -19,85 +24,10 @@ export function Favorites() {
                 <Row>
                     <h3>Аренда</h3>
                     <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
-                    <Form className={"text-center border border-primary bg-body-tertiary "}>
-                        <Row>
-                            <Col>
-                                <FormGroup className={'text-start ms-5 mt-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                        <h4>Аренда земельного участка сельскохозяйственного назначения</h4>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className={'text-start mt-4'}>
-                                    <Form.Label expand={"lg"}
-                                                className={"bg-body-tertiary d-flex justify-content-end me-5 text-primary"}>
-                                        <h3>{`Начальная цена: 103226 руб.`}</h3>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup className={'text-start ms-5 mt-3 mb-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                        Площадь: 1000  M<sup>2</sup>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className={'text-start  mb-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5 text-info"}>
-                                        <u>torgi.gov.ru</u>
-                                    </Form.Label>
-                                </FormGroup>
-                                <FormLabel className={'d-flex justify-content-end me-3'}>
-                                    <Button href={'/BestOption'}>Добавить в избранное</Button>
-                                </FormLabel>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Row>
-                <Row>
-                    <Form className={"text-center border border-primary bg-body-tertiary "}>
-                        <Row>
-                            <Col>
-                                <FormGroup className={'text-start ms-5 mt-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                        <h4>Аренда земельного участка сельскохозяйственного назначения</h4>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className={'text-start mt-4'}>
-                                    <Form.Label expand={"lg"}
-                                                className={"bg-body-tertiary d-flex justify-content-end me-5 text-primary"}>
-                                        <h3>{`Начальная цена: 120010 руб.`}</h3>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup className={'text-start ms-5 mt-3 mb-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                        Площадь: 920  M<sup>2</sup>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className={'text-start  mb-3'}>
-                                    <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5 text-info"}>
-                                        <u>torgi.gov.ru</u>
-                                    </Form.Label>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Row>
-                <Row>
+                    <LotList props={rentLots}/>
                     <h3>Продажа</h3>
                     <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
+                    <LotList props={saleLots}/>
                 </Row>
             </Container>
         </Form>

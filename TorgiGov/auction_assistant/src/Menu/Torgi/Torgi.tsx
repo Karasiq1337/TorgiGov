@@ -14,6 +14,7 @@ import {
     TorgiType
 } from "./Torgi.types";
 import {getTorgiByParams} from "../../Api/Torgi";
+import {LotList} from "./Lots";
 
 const TorgiContext = createContext<LotSearchParams>(
     {
@@ -44,7 +45,7 @@ export function Torgi() {
             torgiType : new Set<TorgiType>()}    
     const [lotsSearchParams, dispatchLotsSearchParams] = 
         useReducer(LotsSearchParamsReducer, initialLotSearchParams)
-    const [lotsProps, setProps] = useState<LotProps[] | null>()
+    const [lotsProps, setProps] = useState<LotProps[]>(new Array<LotProps>)
     const [count, setCount] = useState<number | null>(0);
     
     async function handleSetLotsProps(){
@@ -86,17 +87,11 @@ export function Torgi() {
                         <Form.Label сlassName={"text-center"}>Найдено: {!!count ? count : 0} </Form.Label>
                     </Row>
                     <FormGroup>
-                        {LotList(lotsProps)}
+                        <LotList props={lotsProps}/>
                     </FormGroup>
                 </Container>
             </Form>
         </TorgiContext.Provider>
-    )
-}
-
-const LotList = (props : LotProps[] | null | undefined) =>{
-    return(
-        (props) && props.map(p => <Lot{...p}/>)
     )
 }
 
@@ -188,58 +183,3 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch, type}) 
         />  
     )
 }
-
-function CreateTitle(props : LotProps) : string{
-    const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
-    const propertyType = props.PropertyType == PropertyType.AgriculturalLand ? "сельскохозяйственного назначения" 
-        : "населённых пунктов";
-    const address = props.Address != null ? `по адресу ${props.Address}` : '';
-    
-    return `${type} земель ${propertyType} ${address}` 
-        
-}
-
-export const Lot = ( props : LotProps) =>{
-    return(
-        <Form className={"text-center border border-primary bg-body-tertiary mb-3"}>
-                <Row>
-                    <Col>
-                        <FormGroup className={'text-start ms-5 mt-3'}>
-                           <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                               <h4>{CreateTitle(props)}</h4>
-                           </Form.Label>
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup className={'text-start mt-4'}>
-                            <Form.Label expand={"lg"} 
-                                        className={"bg-body-tertiary d-flex justify-content-end me-5 text-primary"}>
-                                <h3>{`Начальная цена: ${props.StartCost} руб.`}</h3>
-                            </Form.Label>
-                        </FormGroup>
-                    </Col>
-                </Row>
-            <Row>
-                <Col>
-                    <FormGroup className={'text-start ms-5 mt-3 mb-3'}>
-                        <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                            Площадь: {props.Area}  M<sup>2</sup>
-                        </Form.Label>
-                    </FormGroup>
-                </Col>
-                <Col>
-                    <FormGroup className={'text-start  mb-3'}>
-                        <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5 text-info"}>
-                            <u>{props.Link}</u>
-                        </Form.Label>
-                        <FormLabel className={'d-flex justify-content-end me-3'}>
-                            <button onClick={() => addToFavorites(lotsprops)}>Добавить в избранное</button>
-                        </FormLabel>
-                    </FormGroup>
-                </Col>
-            </Row>
-        </Form>
-        
-    )
-}
-export default Lot;

@@ -86,7 +86,7 @@ function mapEnum(enums : Set<SearchParam>) : number[]{
     return res;
 }
 
-export async function getTorgiByParams(params : LotSearchParams) : Promise<LotProps[] | null>{
+export async function getTorgiByParams(params : LotSearchParams) : Promise<LotProps[]>{
     const maBalls = await getByParams(params)
         .then(data => data.data);
     const res = maBalls.map(p => mapToLotProps(p));
@@ -105,11 +105,12 @@ function mapToLotProps(obj : any) : LotProps{
         Platform : obj.platform,
         StartDate : obj.startDate,
         PropertyType : obj.propertyType,
-        Type : obj.type,
+        Type : obj.torgiType,
         Deposit : obj.deposit,
         Id : obj.id,
         RFSubject : obj.rfSubject,
         Izveshenie : obj.izveshenie,
+        Rent : parseInt(obj.rent),
     }
     
     return res;

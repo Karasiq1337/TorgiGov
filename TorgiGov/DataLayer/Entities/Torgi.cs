@@ -34,4 +34,5 @@ public class Torgi : IEntity
 
     public string? Vid { get; set; }
     public string? TorgiType { get; set; }
+    public string? Rent { get; set; }
 }

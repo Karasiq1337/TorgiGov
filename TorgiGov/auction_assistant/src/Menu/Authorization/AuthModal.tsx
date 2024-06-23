@@ -6,8 +6,8 @@ import {useAppDispatch, useAppSelector} from "../../AppHooks";
 import {regSuccessHide} from "./AuthReducer";
 
 export function AuthModal(){
-    const show = useAppSelector((state) => state.authReducer.showAuthModal)
-    const modalText = useAppSelector((state) => state.authReducer.authModalText)
+    const show = useAppSelector((state) => state.reducer.auth.showAuthModal)
+    const modalText = useAppSelector((state) => state.reducer.auth.authModalText)
     const dispatch = useAppDispatch()
     const handleClose = () => dispatch(regSuccessHide());
 
