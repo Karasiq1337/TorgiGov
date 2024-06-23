@@ -1,6 +1,6 @@
-﻿import React, {createContext, FC, useContext, useReducer, useState} from "react";
+﻿import React, {createContext, FC, useContext, useEffect, useReducer, useState} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, Dropdown, DropdownMenu, FormGroup, Row,} from "react-bootstrap";
+import {Col, Container, Dropdown, DropdownMenu, FormGroup, FormLabel, Row,} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {
     LotProps,
@@ -59,8 +59,8 @@ export function Torgi() {
                 <Container>
                     <Row>
                         <Col>
-                            <h1 className={"text-center"}>Вы тут</h1>
-                            <Form.Label сlassName={"text-center"}>Здесь вы можете просмотреть лоты</Form.Label>
+                            <h1 className={"text-center mt-4"}>Список лотов</h1>
+                            <Form.Label сlassName={"text-center"}>Выберите параметры поиска</Form.Label>
                         </Col>
                     </Row>
                     <Row>
@@ -142,7 +142,7 @@ function DropDownButton(params : SearchParam[], initialLabel : string, changeFun
     
     return(
         <Dropdown className={'mb-2'}>
-            <Dropdown.Toggle className={"bg-light border-primary text-dark"} variant="success" id="dropdown-basic">
+            <Dropdown.Toggle className={"bg-light border-primary text-dark mt-2"} variant="success" id="dropdown-basic">
                 {initialLabel}
             </Dropdown.Toggle>
             <DropdownMenu>
@@ -192,7 +192,7 @@ const SmartCheckBox : FC<SmartCheckboxProps> = ({searchParam , dispatch, type}) 
 function CreateTitle(props : LotProps) : string{
     const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
     const propertyType = props.PropertyType == PropertyType.AgriculturalLand ? "сельскохозяйственного назначения" 
-        : "наcелённых пунктов";
+        : "населённых пунктов";
     const address = props.Address != null ? `по адресу ${props.Address}` : '';
     
     return `${type} земель ${propertyType} ${address}` 
@@ -201,7 +201,7 @@ function CreateTitle(props : LotProps) : string{
 
 export const Lot = ( props : LotProps) =>{
     return(
-        <Form className={"text-center border border-primary bg-body-tertiary "}>
+        <Form className={"text-center border border-primary bg-body-tertiary mb-3"}>
                 <Row>
                     <Col>
                         <FormGroup className={'text-start ms-5 mt-3'}>
@@ -223,15 +223,18 @@ export const Lot = ( props : LotProps) =>{
                 <Col>
                     <FormGroup className={'text-start ms-5 mt-3 mb-3'}>
                         <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                            Площадь: {props.Area}  M <sup>2</sup>
+                            Площадь: {props.Area}  M<sup>2</sup>
                         </Form.Label>
                     </FormGroup>
                 </Col>
                 <Col>
                     <FormGroup className={'text-start  mb-3'}>
-                        <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5"}>
-                            {props.Link}
+                        <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5 text-info"}>
+                            <u>{props.Link}</u>
                         </Form.Label>
+                        <FormLabel className={'d-flex justify-content-end me-3'}>
+                            <button onClick={() => addToFavorites(lotsprops)}>Добавить в избранное</button>
+                        </FormLabel>
                     </FormGroup>
                 </Col>
             </Row>
@@ -239,3 +242,4 @@ export const Lot = ( props : LotProps) =>{
         
     )
 }
+export default Lot;
