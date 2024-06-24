@@ -21,7 +21,7 @@ export const NavBar = () => {
                             <NavLink href={'/search'} className={"text-center border border-primary text-black"} >Поиск лотов</NavLink>
                             <NavDropdown className={"d-flex justify-content-center bg-primary"} title={"Сравнить"}>
                                 <NavDropdown.Item href={'/CompareRent'}>Аренда</NavDropdown.Item>
-                                <NavDropdown.Item href={"Продажа"}>Продажа</NavDropdown.Item>
+                                <NavDropdown.Item href={"/CompareSale"}>Продажа</NavDropdown.Item>
                             </NavDropdown>
                             <NavLink href={'/Statistic'} className={"text-center border border-primary text-black"}>Статистика</NavLink>
                         </Nav>

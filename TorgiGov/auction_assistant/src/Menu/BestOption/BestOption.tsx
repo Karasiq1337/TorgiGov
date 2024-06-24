@@ -1,17 +1,15 @@
 import React, {FC} from "react";
 import Form from "react-bootstrap/Form";
 import {Col, Container, FormGroup, FormLabel, Row} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import {LotList} from "../Torgi/Lots";
-import {LotProps, PropertyType} from "../Torgi/Torgi.types";
+import {LotProps, TorgiType} from "../Torgi/Torgi.types";
 import {useAppSelector} from "../../AppHooks";
 
 
-export const BestOptionProperty  = () => {
-    const props = useAppSelector((state) => state.reducer.props.BestOption);
-    const BestOption = () => {
+export const BestOptionProperty : FC = () => {
+    const bestOption = useAppSelector((state) => state.reducer.props.BestOption);
+    const BestOption : FC<{props : LotProps}> = ({props}) => {
         return (
-             <Form>
+            <Form>
                 <Container>
                     <Row>
                         <blockquote className="blockquote">
@@ -29,7 +27,7 @@ export const BestOptionProperty  = () => {
                         <FormGroup className={'text-start mt-4'}>
                             <Form.Label expand={"lg"}
                                         className={"bg-body-tertiary d ms-5 text-primary"}>
-                                <h3>`Начальная цена:` {props.StartCost}</h3>
+                                <h3>Начальная цена: {props.StartCost}</h3>
                             </Form.Label>
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
@@ -39,17 +37,17 @@ export const BestOptionProperty  = () => {
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
                             <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                <h4>Кадастровый номер земельного участка : </h4>
+                                <h4>Кадастровый номер земельного участка : {props.Kadastr}</h4>
                             </Form.Label>
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
                             <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                <>Дата начала подачи заявок: {props.StartDate}</>
+                                <h4>Дата начала подачи заявок: {props.StartDate}</h4>
                             </Form.Label>
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
                             <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                <>Дата окончания подачи заявок: {props.EndDate}</>
+                                <h4>Дата окончания подачи заявок: {props.EndDate}</h4>
                             </Form.Label>
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
@@ -69,7 +67,8 @@ export const BestOptionProperty  = () => {
                         </FormGroup>
                         <FormGroup className={'text-start ms-5 mt-3'}>
                             <Form.Label expand={"lg"} className={" bg-body-tertiary"}>
-                                <h4>Срок аренды: {props.Rent}</h4>
+                                {(props.Type === TorgiType.Rent) ? <h4>Срок аренды: {props.Rent}</h4> 
+                                    : <h4> Шаг аукциона: {props.AuctionStep} руб.</h4> }
                             </Form.Label>
                         </FormGroup>
                     </Row>
@@ -89,13 +88,8 @@ export const BestOptionProperty  = () => {
             </Form>
         )
     }
-        return (
-            if (!!props) {
-                    <BestOption>
-            }
-        )
-    }
     
- 
-
-
+    if(bestOption)
+        return <BestOption props={bestOption}/>
+    return <></>
+}

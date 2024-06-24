@@ -21,7 +21,7 @@ public class UsersController(IUserCommandHandler userCommandHandler) : Controlle
     }
 
     [HttpPost("checkLogin")]
-    public bool CheckLogin([FromBody]CheckLoginRequest request)
+    public bool CheckLogin([FromBody]LoginRequest request)
     {
         return _userCommandHandler.TryFindByLogin(request.Login);
     }

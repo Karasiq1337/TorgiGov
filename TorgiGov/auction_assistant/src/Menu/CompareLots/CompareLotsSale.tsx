@@ -1,21 +1,21 @@
-import React, {FC} from "react";
+﻿import React, {FC, memo, useState} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, FormGroup, Row} from "react-bootstrap";
+import {Col, Container, FormGroup, FormLabel, FormText, Modal, ModalBody, ModalTitle, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {LotList} from "../Torgi/Lots";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
 import {LotProps, TorgiType} from "../Torgi/Torgi.types";
 import {bestoption} from "../BestOption/BestOptionReducer";
 
-export function CompareLotsRent()  {
+export function CompareLotsSale()  {
     const dispatch = useAppDispatch()
     const favoriteLots = useAppSelector((state) => state.reducer.torgi.lots);
-    const rentLots = favoriteLots.filter(lot => lot.Type === TorgiType.Rent);
-    const maxArea = Math.max(...rentLots.flatMap(prop => prop.Area ? prop.Area : []));
-    const minDeposit = Math.min(...rentLots.flatMap(prop => prop.Deposit ? prop.Deposit : []));
-    const minStartCost = Math.min(...rentLots.flatMap(prop => prop.StartCost ? prop.StartCost : []));
-    const maxRent = Math.max(...rentLots.flatMap(prop => prop.Rent ? prop.Rent : []));
-    const scores = rentLots.map(prop =>{
+    const saleLots = favoriteLots.filter(lot => lot.Type === TorgiType.Sale);
+    const maxArea = Math.max(...saleLots.flatMap(prop => prop.Area ? prop.Area : []));
+    const minDeposit = Math.min(...saleLots.flatMap(prop => prop.Deposit ? prop.Deposit : []));
+    const minStartCost = Math.min(...saleLots.flatMap(prop => prop.StartCost ? prop.StartCost : []));
+    const minStep = Math.min(...saleLots.flatMap(prop => prop.AuctionStep ? prop.AuctionStep : []));
+    const scores = saleLots.map(prop =>{
         let score = 0;
         if(prop.Area == maxArea){
             score += 8;
@@ -26,13 +26,13 @@ export function CompareLotsRent()  {
         if(prop.StartCost == minStartCost){
             score += 4;
         }
-        if(prop.Rent == maxRent){
+        if(prop.AuctionStep == minStep){
             score += 1;
         }
         return score;
     })
-    dispatch(bestoption(rentLots[scores.indexOf(Math.max(...scores))]))
-    
+    dispatch(bestoption(saleLots[scores.indexOf(Math.max(...scores))]))
+
     return (
         <>
             <Form>
@@ -40,25 +40,25 @@ export function CompareLotsRent()  {
                     <Row>
                         <blockquote className="blockquote">
                             <h1 className={'text-center mt-5'}>Сравнение лотов</h1>
-                            <footer className="blockquote-footer text-center mt-2">Здесь вы можете сравнить ваши лоты, вид торгов - Аренда
+                            <footer className="blockquote-footer text-center mt-2">Здесь вы можете сравнить ваши лоты, вид торгов - Продажа
                             </footer>
                         </blockquote>
                     </Row>
                     <Row>
-                        <h4>Аренда</h4>
+                        <h4>Продажа</h4>
                         <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
-                        <LotList props={rentLots}/>
+                        <LotList props={saleLots}/>
                     </Row>
                     <Row>
                         <h3 className={'mt-5 text-center'}>Анализ характеристик</h3>
                     </Row>
                     <Row>
-                        <PropertyList props={rentLots} scores={scores}></PropertyList>
+                        <PropertyList props={saleLots} scores={scores}></PropertyList>
                     </Row>
                     <Row>
                     </Row>
                     <Row>
-                        {(rentLots.length !== 0) ? <Button className={'mb-5'} type={"submit"} href={"BestOption"}>
+                        {(saleLots.length !== 0) ? <Button className={'mb-5'} type={"submit"} href={"BestOption"}>
                             Посмотреть лучший вариант
                         </Button> : <></>}
                     </Row>
@@ -71,7 +71,7 @@ export function CompareLotsRent()  {
 
 const PropertyList : FC<{props : LotProps[], scores: number[]}> = ({props, scores}) =>{
     let count = 0;
-    
+
     return(
         <>
             {props.map(prop => {
@@ -113,8 +113,8 @@ const Property : FC<{props : LotProps, score : number}> = ({props, score}) => {
                 <Col>
                     <FormGroup className={'text-start ms-5 mt-3 '}>
                         <Form.Label expand={"lg"} className={" bg-body-tertiary "}>
-                            <h4>Срок аренды : </h4>
-                            <h4>{props.Rent} лет</h4>
+                            <h4>Шаг аукциона : </h4>
+                            <h4>{props.AuctionStep} руб.</h4>
                         </Form.Label>
                     </FormGroup>
                 </Col>

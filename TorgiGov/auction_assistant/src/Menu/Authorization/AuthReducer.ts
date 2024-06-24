@@ -1,4 +1,6 @@
 ﻿import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import {persistor} from "../../AppStore";
+import {PURGE} from "redux-persist/es/constants";
 
 export interface AuthInitialState {
     login: string,
@@ -48,7 +50,7 @@ export const authSlice = createSlice({
             regSuccessHide : (state) => {
                 state.showAuthModal = false;
             }
-        }
+        },
 })
 
 export const { logIn,

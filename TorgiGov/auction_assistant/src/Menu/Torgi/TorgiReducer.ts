@@ -18,10 +18,14 @@ export const torgiSlice = createSlice({
         },
         delLot : (state , action : PayloadAction<LotProps> ) =>{
             state.lots = state.lots.filter(lot => lot.Id != action.payload.Id);
+        },
+        setLots: (state, action : PayloadAction<LotProps[]>) => {
+            state.lots = action.payload;
         }
     }
 })
 
-export const { addLot,
-                delLot} = torgiSlice.actions
+export const {  addLot,
+                delLot,
+                setLots} = torgiSlice.actions
 export default torgiSlice.reducer

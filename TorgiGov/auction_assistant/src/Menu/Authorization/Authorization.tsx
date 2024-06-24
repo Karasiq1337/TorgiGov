@@ -6,6 +6,9 @@ import React, {useState} from "react";
 import {logIn, logInFail, logOut, showReg} from "./AuthReducer";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
 import {login as apiLogin}  from "../../Api/Users";
+import {getFavorites} from "../../Api/Favorites";
+import {setLots} from "../Torgi/TorgiReducer";
+import {LotProps} from "../Torgi/Torgi.types";
 
 const Authorization = () =>{
     const dispatch = useAppDispatch();
@@ -19,6 +22,7 @@ const Authorization = () =>{
         const logSuccess = await apiLogin(login, password);
         if(logSuccess === true){
             dispatch(logIn(login));
+            dispatch(setLots(await getFavorites(login)))
             return;
         }
         dispatch(logInFail());
@@ -39,10 +43,16 @@ const Authorization = () =>{
             </InputGroup>  
         )
     }
+
+    function handleLogout() {
+        dispatch(logOut());
+        dispatch(setLots(new Array<LotProps>));
+    }
+
     return(
         <Form>
             <Form.Label className={'me-3'}>{`Привет, ${ login }!`} </Form.Label>
-            <Button onClick={() => dispatch(logOut())}>Выйти</Button>
+            <Button onClick={() => handleLogout()}>Выйти</Button>
         </Form>
     )
 }

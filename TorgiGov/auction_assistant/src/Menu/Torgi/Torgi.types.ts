@@ -42,8 +42,8 @@ export interface LotProps{
     Izveshenie : string | null,
     State : TorgiState | null,
     Link : string | null,
-    StartDate : Date | null,
-    EndDate : Date | null,
+    StartDate : string | null,
+    EndDate : string | null,
     RFSubject : string | null,
     Address : string | null,
     Deposit : number | null,
@@ -53,6 +53,7 @@ export interface LotProps{
     Area : number | null,
     Rent : number | null,
     Vid : string | null,
+    Kadastr : string | null,
 }
 
 export interface LotSearchParams{

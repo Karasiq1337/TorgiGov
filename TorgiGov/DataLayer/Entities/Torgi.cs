@@ -11,9 +11,9 @@ public class Torgi : IEntity
 
     public string? Link { get; set; }
     
-    public DateTime StartDate { get; set; }
+    public DateOnly StartDate { get; set; }
 
-    public DateTime EndDate { get; set; }
+    public DateOnly EndDate { get; set; }
 
     public string? RFSubject { get; set; }
     
@@ -35,4 +35,5 @@ public class Torgi : IEntity
     public string? Vid { get; set; }
     public string? TorgiType { get; set; }
     public string? Rent { get; set; }
+    public string? Kadastr { get; set; }
 }

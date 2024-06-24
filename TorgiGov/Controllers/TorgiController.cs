@@ -8,14 +8,9 @@ namespace TorgiGov.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TorgiController : ControllerBase
+public class TorgiController(ITorgiCommandHandler commandHandler) : ControllerBase
 {
-    private readonly ITorgiCommandHandler _commandHandler;
-
-    public TorgiController(ITorgiCommandHandler commandHandler)
-    {
-        _commandHandler = commandHandler;
-    }
+    private readonly ITorgiCommandHandler _commandHandler = commandHandler;
 
     [HttpGet]
     public async Task<Torgi?> Get(Guid id)

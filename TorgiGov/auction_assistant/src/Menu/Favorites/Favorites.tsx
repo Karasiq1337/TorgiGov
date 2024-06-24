@@ -8,8 +8,21 @@ import {TorgiType} from "../Torgi/Torgi.types";
 
 export function Favorites() {
     const favoriteLots = useAppSelector((state) => state.reducer.torgi.lots);
+    const isLogged = useAppSelector((state) => state.reducer.auth.isLogged);
     const rentLots = favoriteLots.filter(lot => lot.Type === TorgiType.Rent);
     const saleLots = favoriteLots.filter(lot => lot.Type === TorgiType.Sale);
+    
+    if(!isLogged){
+        return (
+            <Form>
+                <Container>
+                    <FormLabel>
+                        <h4>Войдите чтобы ...</h4>
+                    </FormLabel>
+                </Container>
+            </Form>
+        )
+    }
     
     return (
         <Form>

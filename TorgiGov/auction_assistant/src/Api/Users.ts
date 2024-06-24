@@ -46,7 +46,7 @@ export async function reg(login : string, password : string){
 }
 
 export async function login(login : string, password : string) {
-    const res = await logInRequest(login, password).then(data => data.data)
+    const res = await logInRequest(login, password).then(data => data.data  )
         .catch(() => {return false;})
     return res;
 }

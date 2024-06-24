@@ -93,7 +93,7 @@ export async function getTorgiByParams(params : LotSearchParams) : Promise<LotPr
     return res;
 }
 
-function mapToLotProps(obj : any) : LotProps{
+export function mapToLotProps(obj : any) : LotProps{
     const res : LotProps ={
         Address: obj.address, 
         Link : obj.link,
@@ -111,6 +111,8 @@ function mapToLotProps(obj : any) : LotProps{
         RFSubject : obj.rfSubject,
         Izveshenie : obj.izveshenie,
         Rent : parseInt(obj.rent),
+        Vid : obj.vid,
+        Kadastr : obj.kadastr,
     }
     
     return res;

@@ -5,6 +5,7 @@ import {addLot, delLot} from "./TorgiReducer";
 import Form from "react-bootstrap/Form";
 import {Col, FormGroup, FormLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {addFavorites, delFavorites} from "../../Api/Favorites";
 
 export function CreateTitle(props : LotProps) : string{
     const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
@@ -17,6 +18,7 @@ export function CreateTitle(props : LotProps) : string{
 }
 
 export const Lot : FC<{props : LotProps}> = ( {props} )  =>{
+    const userState = useAppSelector((state) => state.reducer.auth)
     const inFavorites = useAppSelector((state) => {
         if(props.Id){
             return !!state.reducer.torgi.lots.find(lot => lot.Id === props.Id);
@@ -25,11 +27,17 @@ export const Lot : FC<{props : LotProps}> = ( {props} )  =>{
     })
     const dispatch = useAppDispatch();
 
-    function favoriteButtonClick() {
+    async function favoriteButtonClick() {
         if(inFavorites){
             dispatch(delLot(props));
+            if(userState.isLogged && props.Id){
+                await delFavorites(userState.login, props.Id);
+            }
         }
         else {
+            if(userState.isLogged && props.Id){
+                await addFavorites(userState.login, props.Id);
+            }
             dispatch(addLot(props));
         }
     }

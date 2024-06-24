@@ -32,6 +32,7 @@ public static class ApplicationStartup
     {
         _builder.Services.AddSingleton<IUserCommandHandler, UserCommandHandler>();
         _builder.Services.AddSingleton<ITorgiCommandHandler, TorgiCommandHandler>();
+        _builder.Services.AddSingleton<IFavoritesCommandHandler, FavoritesCommandHandler>();
     }
 
     private static void CreateWebApplication()
