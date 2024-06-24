@@ -52,7 +52,7 @@ export function CompareLotsRent()  {
                             </FormGroup>
                             <FormGroup >
                                 <FormLabel className={'text-center'}>Оптимальный вариант найден !</FormLabel>
-                                <Button>Посмотреть</Button>
+                                <Button href={'/BestOption'}>Посмотреть</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
@@ -161,6 +161,4 @@ const Property : FC<{props : LotProps}> = ({props}) => {
             </Row>
         </Form>
     )
-    
-    
 }

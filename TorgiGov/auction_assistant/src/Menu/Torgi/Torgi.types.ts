@@ -52,6 +52,7 @@ export interface LotProps{
     PropertyType : PropertyType | null,
     Area : number | null,
     Rent : number | null,
+    Vid : string | null,
 }
 
 export interface LotSearchParams{

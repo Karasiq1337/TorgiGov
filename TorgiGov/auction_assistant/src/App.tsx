@@ -8,8 +8,9 @@ import {useAppSelector} from "./AppHooks";
 import RegModal from "./Menu/Authorization/RegModal";
 import {Favorites} from "./Menu/Favorites/Favorites";
 import {CompareLotsRent} from "./Menu/CompareLots/CompareLotsRent";
-import BestOption from "./Menu/BestOption/BestOption";
+import {BestOption, BestOptionProperty} from "./Menu/BestOption/BestOption";
 import {AuthModal} from "./Menu/Authorization/AuthModal";
+import {Statistic} from "./Menu/Statistic/Statistic";
 
 
 function App(){
@@ -29,7 +30,8 @@ function App(){
                   <Route path={"/search"} element={<Torgi/>}/>
                   <Route path={'/favorites'} element={<Favorites/>}/>
                   <Route path={'/CompareRent'} element={<CompareLotsRent/>}/>
-                  <Route path={'/BestOption'} element={<BestOption/>}/>
+                  <Route path={'/BestOption'} element={<BestOptionProperty/>}/>
+                  <Route path={'/Statistic'} element={<Statistic/>}/>
               </Routes>
           </>
           </body>

@@ -23,7 +23,7 @@ export const NavBar = () => {
                                 <NavDropdown.Item href={'/CompareRent'}>Аренда</NavDropdown.Item>
                                 <NavDropdown.Item href={"Продажа"}>Продажа</NavDropdown.Item>
                             </NavDropdown>
-                            <NavLink className={"text-center border border-primary text-black"}>Статистика</NavLink>
+                            <NavLink href={'/Statistic'} className={"text-center border border-primary text-black"}>Статистика</NavLink>
                         </Nav>
                         <Nav>
                             <Authorization></Authorization>
