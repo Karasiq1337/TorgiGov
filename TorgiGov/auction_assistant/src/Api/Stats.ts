@@ -16,10 +16,20 @@ export async function incrementRequest(lotId : string): Promise<boolean>{
     }).then(data => data.status === 200)
 }
 
-export async function getStatsRequest() : Promise<number[]>{
+async function getStatsRequest() : Promise<object>{
 
-    return axios<number[]>({
+    return axios<any>({
         method : 'get',
         url: `${API_URL}/get`,
-    }).then(data => data.data )
+    }).then(data => data.data)
+}
+
+export async function getStats() : Promise<Map<string, number>>{
+    const resp = await getStatsRequest();
+    const map = new Map(Object.entries(resp));
+    return map
+}
+function* entries({obj}: { obj: any }) {
+    for (let key in obj)
+        yield [key, obj[key]];
 }
