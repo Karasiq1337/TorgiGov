@@ -10,6 +10,7 @@ public sealed class DataContext : DbContext
     public readonly DbSet<User> UsersRepository;
     public readonly DbSet<Torgi> TorgiRepository;
     public readonly DbSet<Favorites> FavoritesRepository;
+    public readonly DbSet<DbStats> StatsRepository;
     
     public DataContext(DbContextOptions<DataContext> options)
         :base(options)
@@ -19,6 +20,7 @@ public sealed class DataContext : DbContext
         UsersRepository = Set<User>();
         TorgiRepository = Set<Torgi>();
         FavoritesRepository = Set<Favorites>();
+        StatsRepository = Set<DbStats>();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,5 +28,6 @@ public sealed class DataContext : DbContext
         modelBuilder.Entity<User>();
         modelBuilder.Entity<Torgi>();
         modelBuilder.Entity<Favorites>();
+        modelBuilder.Entity<DbStats>();
     }
 }

@@ -4,6 +4,7 @@ using Npgsql;
 using TorgiGov.ApplicationContext;
 using TorgiGov.CommandHandlers;
 using TorgiGov.Configs;
+using TorgiGov.Controllers;
 
 namespace TorgiGov.ApplicationLayer;
 
@@ -33,6 +34,7 @@ public static class ApplicationStartup
         _builder.Services.AddSingleton<IUserCommandHandler, UserCommandHandler>();
         _builder.Services.AddSingleton<ITorgiCommandHandler, TorgiCommandHandler>();
         _builder.Services.AddSingleton<IFavoritesCommandHandler, FavoritesCommandHandler>();
+        _builder.Services.AddSingleton<IStatsCommandHandler, StatsCommandHandler>();
     }
 
     private static void CreateWebApplication()
