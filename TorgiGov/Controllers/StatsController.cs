@@ -12,9 +12,9 @@ public class StatsController(IStatsCommandHandler statsCommandHandler) : Control
     private readonly IStatsCommandHandler _statsCommandHandler = statsCommandHandler;
 
     [HttpPost("increment")]
-    public async Task Increment([FromQuery] Guid torgiId)
+    public async Task Increment([FromBody] IncrementRequest request)
     {
-        await _statsCommandHandler.IncrementByTorgiId(torgiId);
+        await _statsCommandHandler.IncrementByTorgiId(request.TorgiId);
     }
 
     [HttpGet("get")]

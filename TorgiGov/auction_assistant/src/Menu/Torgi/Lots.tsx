@@ -7,6 +7,7 @@ import {Col, FormGroup, FormLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {addFavorites, delFavorites} from "../../Api/Favorites";
 import {Link} from "@radix-ui/themes";
+import {incrementRequest} from "../../Api/Stats";
 
 export function CreateTitle(props : LotProps) : string{
     const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
@@ -38,6 +39,7 @@ export const Lot : FC<{props : LotProps}> = ( {props} )  =>{
         else {
             if(userState.isLogged && props.Id){
                 await addFavorites(userState.login, props.Id);
+                await incrementRequest(props.Id);
             }
             dispatch(addLot(props));
         }

@@ -1,3 +1,3 @@
 ﻿namespace TorgiGov.ApiLayer;
 
-public record IncrementRequest(string TorgiType, string PropertyType, string PropertyForm);
+public record IncrementRequest(Guid TorgiId);
