@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import {Col, FormGroup, FormLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {addFavorites, delFavorites} from "../../Api/Favorites";
+import {Link} from "@radix-ui/themes";
 
 export function CreateTitle(props : LotProps) : string{
     const type = props.Type == TorgiType.Rent ? "Аренда" : "Продажа";
@@ -72,7 +73,7 @@ export const Lot : FC<{props : LotProps}> = ( {props} )  =>{
                 <Col>
                     <FormGroup className={'text-start  mb-3'}>
                         <Form.Label expand={"lg"} className={" bg-body-tertiary d-flex justify-content-end me-5 text-info"}>
-                            <u>{props.Link}</u>
+                            <Link>{props.Link}</Link>
                         </Form.Label>
                         <FormLabel className={'d-flex justify-content-end me-3'}>
                             <Button onClick={() => favoriteButtonClick()}

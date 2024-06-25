@@ -9,6 +9,7 @@ import {bestoption} from "../BestOption/BestOptionReducer";
 
 export function CompareLotsSale()  {
     const dispatch = useAppDispatch()
+    const isLogged = useAppSelector((state) => state.reducer.auth.isLogged);
     const favoriteLots = useAppSelector((state) => state.reducer.torgi.lots);
     const saleLots = favoriteLots.filter(lot => lot.Type === TorgiType.Sale);
     const maxArea = Math.max(...saleLots.flatMap(prop => prop.Area ? prop.Area : []));
@@ -32,6 +33,17 @@ export function CompareLotsSale()  {
         return score;
     })
     dispatch(bestoption(saleLots[scores.indexOf(Math.max(...scores))]))
+    if(!isLogged){
+        return (
+            <Form>
+                <Container>
+                    <FormLabel className={'justify-content-center mt-5'}>
+                        <h2>Для просмотра страницы необходимо авторизоваться</h2>
+                    </FormLabel>
+                </Container>
+            </Form>
+        )
+    }
 
     return (
         <>
@@ -59,7 +71,7 @@ export function CompareLotsSale()  {
                     </Row>
                     <Row>
                         {(saleLots.length !== 0) ? <Button className={'mb-5'} type={"submit"} href={"BestOption"}>
-                            Посмотреть лучший вариант
+                            Просмотр оптимального варианта
                         </Button> : <></>}
                     </Row>
                 </Container>
@@ -120,7 +132,7 @@ const Property : FC<{props : LotProps, score : number}> = ({props, score}) => {
                 </Col>
                 <Col>
                     <FormGroup className={'text-start ms-5 mt-3 '}>
-                        <Form.Label expand={"lg"} className={" bg-body-tertiary "}>
+                        <Form.Label expand={"lg"} className={" bg-body-tertiary text-primary"}>
                             <h4>Оценка: </h4>
                             <h4>{score} баллов</h4>
                         </Form.Label>

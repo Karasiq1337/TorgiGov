@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, FormGroup, FormLabel, Row} from "react-bootstrap";
+import {Col, Container, FormGroup, FormLabel, FormText, Row} from "react-bootstrap";
 import {useAppSelector} from "../../AppHooks";
 import {LotList} from "../Torgi/Lots";
 import {TorgiType} from "../Torgi/Torgi.types";
@@ -16,8 +16,8 @@ export function Favorites() {
         return (
             <Form>
                 <Container>
-                    <FormLabel>
-                        <h4>Войдите чтобы ...</h4>
+                    <FormLabel className={'justify-content-center mt-5'}>
+                        <h2>Для просмотра страницы необходимо авторизоваться</h2>
                     </FormLabel>
                 </Container>
             </Form>

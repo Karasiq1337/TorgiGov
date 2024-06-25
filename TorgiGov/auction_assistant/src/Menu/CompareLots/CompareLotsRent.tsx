@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, FormGroup, Row} from "react-bootstrap";
+import {Col, Container, FormGroup, FormLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {LotList} from "../Torgi/Lots";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
@@ -9,6 +9,7 @@ import {bestoption} from "../BestOption/BestOptionReducer";
 
 export function CompareLotsRent()  {
     const dispatch = useAppDispatch()
+    const isLogged = useAppSelector((state) => state.reducer.auth.isLogged);
     const favoriteLots = useAppSelector((state) => state.reducer.torgi.lots);
     const rentLots = favoriteLots.filter(lot => lot.Type === TorgiType.Rent);
     const maxArea = Math.max(...rentLots.flatMap(prop => prop.Area ? prop.Area : []));
@@ -33,6 +34,17 @@ export function CompareLotsRent()  {
     })
     dispatch(bestoption(rentLots[scores.indexOf(Math.max(...scores))]))
     
+    if(!isLogged){
+        return (
+            <Form>
+                <Container>
+                    <FormLabel className={'justify-content-center mt-5'}>
+                        <h2>Для просмотра страницы необходимо авторизоваться</h2>
+                    </FormLabel>
+                </Container>
+            </Form>
+        )
+    }
     return (
         <>
             <Form>
@@ -59,7 +71,7 @@ export function CompareLotsRent()  {
                     </Row>
                     <Row>
                         {(rentLots.length !== 0) ? <Button className={'mb-5'} type={"submit"} href={"BestOption"}>
-                            Посмотреть лучший вариант
+                            Просмотр оптимального варианта
                         </Button> : <></>}
                     </Row>
                 </Container>
@@ -120,7 +132,7 @@ const Property : FC<{props : LotProps, score : number}> = ({props, score}) => {
                 </Col>
                 <Col>
                     <FormGroup className={'text-start ms-5 mt-3 '}>
-                        <Form.Label expand={"lg"} className={" bg-body-tertiary "}>
+                        <Form.Label expand={"lg"} className={" bg-body-tertiary text-primary"}>
                             <h4>Оценка: </h4>
                             <h4>{score} баллов</h4>
                         </Form.Label>
