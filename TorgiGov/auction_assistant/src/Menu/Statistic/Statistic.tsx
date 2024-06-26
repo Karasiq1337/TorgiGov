@@ -1,11 +1,10 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, ListGroup, ListGroupItem, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {PieChart} from "../../Components/Donut";
 import 'chart.js/auto';
-import {LotSearchParams, PropertyForm, PropertyType, TorgiState, TorgiType} from "../Torgi/Torgi.types";
 import {getStats as getStatsApi} from "../../Api/Stats";
-import {Await} from "react-router-dom";
+
 
 
 
@@ -31,7 +30,7 @@ export const Statistic: React.FC = () => {
                 {
                     label: 'Предпочтение пользователей',
                     data: [stats.get("Rent"), stats.get("Selling")],
-                    backgroundColor: ['green', 'aqua'],
+                    backgroundColor: ['#519DE9', '#06C'],
                 },
             ],
         };
@@ -41,7 +40,7 @@ export const Statistic: React.FC = () => {
                 {
                     label: 'Предпочтение пользователей',
                     data: [stats.get("AgriculturalLand"), stats.get("SettlementsLands")],
-                    backgroundColor: ['green', 'aqua'],
+                    backgroundColor: ['#519DE9', '#06C'],
                 },
             ],
         };
@@ -51,7 +50,7 @@ export const Statistic: React.FC = () => {
                 {
                     label: 'Предпочтение пользователей',
                     data: [stats.get("Gos"), stats.get("Urban"), stats.get("RFSubject")],
-                    backgroundColor: ['green', 'aqua', "black"],
+                    backgroundColor: ['#519DE9', '#06C', "#004B95"],
                 },
             ],
         };
@@ -67,18 +66,16 @@ export const Statistic: React.FC = () => {
                     </blockquote>
                 </Row>
                 <Row>
-                    <Col>
-                        <ListGroup>
-                            
-                        </ListGroup>
-                    </Col>
                     <Col className={'mt-5 h-50 w-50 justify-content-center'}>
+                        <h3 className={'text-center border border-primary'}>Вид торга</h3>
                         <PieChart data={torgiTypeData}></PieChart>
                     </Col>
                     <Col className={'mt-5 h-50 w-50 justify-content-center'}>
+                        <h3 className={'text-center border border-primary'}>Тип земельного участка</h3>
                         <PieChart data={propertyTypeData}></PieChart>
                     </Col>
-                    <Col className={'mt-5 h-50 w-50 justify-content-center'}>
+                    <Col className={'mt-5 h-50 w-50 justify-content-center '}>
+                        <h3 className={'text-center border border-primary'}>Форма собственности</h3>
                         <PieChart data={propertyFormData}></PieChart>
                     </Col>
                 </Row>

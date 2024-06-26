@@ -1,7 +1,6 @@
-import {Carousel, Col, Container, Image, ListGroup, Row} from "react-bootstrap";
+import {Carousel, Col, Container, ListGroup, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import React from "react";
-import Auctionlogo from 'Pictures/AuctionAssistantlogo.png';
 
 export function Home(){
     return(

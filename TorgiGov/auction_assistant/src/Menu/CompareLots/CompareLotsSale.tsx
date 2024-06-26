@@ -1,6 +1,6 @@
-﻿import React, {FC, memo, useState} from "react";
+﻿import React, {FC} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, FormGroup, FormLabel, FormText, Modal, ModalBody, ModalTitle, Row} from "react-bootstrap";
+import {Col, Container, FormGroup, FormLabel,  Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {LotList} from "../Torgi/Lots";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";

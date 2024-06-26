@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, FormGroup, FormLabel, FormText, Row} from "react-bootstrap";
+import {Container, FormLabel, Row} from "react-bootstrap";
 import {useAppSelector} from "../../AppHooks";
 import {LotList} from "../Torgi/Lots";
 import {TorgiType} from "../Torgi/Torgi.types";

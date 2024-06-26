@@ -1,7 +1,5 @@
-﻿import {FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalTitle} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import React, {FC, useState} from "react";
+﻿import {Modal} from "react-bootstrap";
+import React from "react";
 import {useAppDispatch, useAppSelector} from "../../AppHooks";
 import {regSuccessHide} from "./AuthReducer";
 

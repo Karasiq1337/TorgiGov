@@ -1,6 +1,6 @@
-﻿import React, {createContext, FC, useContext, useEffect, useReducer, useState} from "react";
+﻿import React, {createContext, FC, useContext, useReducer, useState} from "react";
 import Form from "react-bootstrap/Form";
-import {Col, Container, Dropdown, DropdownMenu, FormGroup, FormLabel, Row,} from "react-bootstrap";
+import {Col, Container, Dropdown, DropdownMenu, FormGroup, Row,} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {
     LotProps,
@@ -75,8 +75,7 @@ export function Torgi() {
                     
                     {RentRadio(dispatchLotsSearchParams)}
                     <Row>
-                        <Form.Label expand={"lg"}
-                                    className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
+                        <Form.Label expand={"lg"} className={"text-center border border-primary bg-body-tertiary"}></Form.Label>
                     </Row>
                     <Row>
                         <Col>
