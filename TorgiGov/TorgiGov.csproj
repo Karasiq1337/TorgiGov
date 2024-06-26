@@ -8,6 +8,7 @@
         <UserSecretsId>7da5eb97-4f5f-49fd-bf2e-0078a6e95a92</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>TorgiGov</RootNamespace>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>

@@ -29,6 +29,7 @@ function App(){
               {regClicked && <RegModal/>}
               <Routes>
                   <Route path={"/home"} element={<Home/>}/>
+                  <Route path={"/"} element={<Home/>}/>
                   <Route path={"/search"} element={<Torgi/>}/>
                   <Route path={'/favorites'} element={<Favorites/>}/>
                   <Route path={'/CompareRent'} element={<CompareLotsRent/>}/>
